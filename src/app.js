@@ -1,5 +1,7 @@
+import { StreamSiteApp } from "stream-site";
+
 function App() {
-  return <div>Hello world</div>;
+  return <StreamSiteApp />;
 }
 
 export default App;
