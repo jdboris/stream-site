@@ -21,7 +21,6 @@ jobs:
       - name: 🔨 Build Project
         run: |
           npm install
-          ls node_modules
           npm run build
         env:
           CI: false
