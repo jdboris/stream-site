@@ -22,6 +22,10 @@ jobs:
         run: |
           npm config set @jdboris:registry=http://registry.npmjs.org
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
+          npm remove @jdboris/react-firebase-chat
+          npm i @jdboris/react-firebase-chat
+          npm remove @jdboris/stream-site
+          npm i @jdboris/stream-site
           npm install
           npm run build
         env:
