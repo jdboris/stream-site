@@ -20,11 +20,12 @@ jobs:
 
       - name: 🔨 Build Project
         run: |
+          npm config set @jdboris:registry=http://registry.npmjs.org
+          //registry.npmjs.org/:_authToken=${{ secrets.USERNAME }}
           npm install
           npm run build
         env:
           CI: false
-          NPM_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
