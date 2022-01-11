@@ -1,4 +1,4 @@
-import { StreamSiteApp } from "stream-site";
+import { StreamSiteApp } from "@jdboris/stream-site";
 
 function App() {
   return <StreamSiteApp />;
