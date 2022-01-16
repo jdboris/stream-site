@@ -20,6 +20,7 @@ jobs:
 
       - name: 🔨 Build Project
         run: |
+          export NODE_ENV=production
           npm remove @jdboris/react-firebase-chat
           npm remove @jdboris/stream-site
           npm config set @jdboris:registry=http://registry.npmjs.org
