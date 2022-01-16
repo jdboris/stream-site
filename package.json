@@ -1,6 +1,6 @@
 {
   "name": "xxxxxxxx",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@jdboris/react-firebase-chat": "file:../@local/@jdboris/react-firebase-chat.tgz",
-    "@jdboris/stream-site": "file:../@local/stream-site.tgz"
+    "@jdboris/stream-site": "file:../@local/@jdboris/stream-site.tgz"
   },
   "peerDependencies": {
     "@jdboris/react-firebase-chat": "*",

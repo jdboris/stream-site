@@ -9,6 +9,6 @@ do
     mkdir --parents $repoDir/@local/$packageName
     mv $repoDir/@local/$(npm pack --pack-destination=$repoDir/@local) $repoDir/@local/$packageName.tgz
     cd $originalDir
-    npm remove $packageName
+    # npm remove $packageName
     npm i --save-dev $repoDir/@local/$packageName.tgz
 done
