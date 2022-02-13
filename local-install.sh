@@ -13,3 +13,5 @@ do
     # npm remove $packageName
     npm i --save-dev -f $repoDir/@local/$packageName.tgz
 done
+
+exec bash
