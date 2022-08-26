@@ -41,4 +41,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           protocol: ftps
-          port: 21
+          port: 2053
