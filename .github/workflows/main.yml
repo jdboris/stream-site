@@ -2,7 +2,7 @@ on: push
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
@@ -31,14 +31,16 @@ jobs:
           npm run build
         env:
           CI: false
+      
+      - name: Deploy with SSH
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "--delete"
+          SOURCE: "/"
+          REMOTE_HOST: ${{ secrets.SSH_SERVER }}
+          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT }} 
+          TARGET: api/
+          EXCLUDE: "**/.git*, **/.git*/**, **/.github*, **/.github*/**, .gitattributes, .gitignore, LICENSE, README.md, NOTES.txt, package-lock.json, package.json"
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.1.0
-        with:
-          server: ${{ secrets.SERVER }}
-          local-dir: ./build/
-          server-dir: default/
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          protocol: ftps
-          port: 29056
