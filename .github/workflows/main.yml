@@ -41,6 +41,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.SSH_SERVER }}
           REMOTE_USER: ${{ secrets.SSH_USERNAME }}
           REMOTE_PORT: ${{ secrets.SSH_PORT }} 
-          TARGET: api/
+          TARGET: default/
           EXCLUDE: "**/.git*, **/.git*/**, **/.github*, **/.github*/**, .gitattributes, .gitignore, LICENSE, README.md, NOTES.txt, package-lock.json, package.json"
 
