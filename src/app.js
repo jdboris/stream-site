@@ -6,7 +6,7 @@ function App() {
   return (
     <StreamSiteApp
       footerLinks={[
-        <a href="https://discord.gg/GXWMdPd" target="_blank" rel="noreferrer">
+        <a href="https://discord.gg/9KQd2AB3ZA" target="_blank" rel="noreferrer">
           <img src={DiscordIcon} />
         </a>,
         <a
