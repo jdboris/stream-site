@@ -25,8 +25,8 @@ jobs:
           npm remove @jdboris/stream-site
           npm config set @jdboris:registry=https://registry.npmjs.org
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
-          npm i @jdboris/react-firebase-chat
-          npm i @jdboris/stream-site
+          npm i @jdboris/react-firebase-chat@1.31.3 --save-exact
+          npm i @jdboris/stream-site@0.6.21 --save-exact
           npm install
           npm run build
         env:
