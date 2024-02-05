@@ -23,7 +23,7 @@ jobs:
           export NODE_ENV=production
           npm remove @jdboris/react-firebase-chat
           npm remove @jdboris/stream-site
-          npm config set @jdboris:registry=http://registry.npmjs.org
+          npm config set @jdboris:registry=https://registry.npmjs.org
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
           npm i @jdboris/react-firebase-chat
           npm i @jdboris/stream-site
@@ -31,7 +31,7 @@ jobs:
           npm run build
         env:
           CI: false
-      
+
       - name: Deploy with SSH
         uses: easingthemes/ssh-deploy@main
         env:
@@ -40,7 +40,6 @@ jobs:
           SOURCE: "/build/"
           REMOTE_HOST: ${{ secrets.SSH_SERVER }}
           REMOTE_USER: ${{ secrets.SSH_USERNAME }}
-          REMOTE_PORT: ${{ secrets.SSH_PORT }} 
+          REMOTE_PORT: ${{ secrets.SSH_PORT }}
           TARGET: /var/www/default/
           EXCLUDE: "**/.git*, **/.git*/**, **/.github*, **/.github*/**, .gitattributes, .gitignore, LICENSE, README.md, NOTES.txt, package-lock.json, package.json"
-
