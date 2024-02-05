@@ -36,10 +36,6 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@jdboris/react-firebase-chat": "file:../@local/@jdboris/react-firebase-chat.tgz",
-    "@jdboris/stream-site": "file:../@local/@jdboris/stream-site.tgz"
-  },
   "peerDependencies": {
     "@jdboris/react-firebase-chat": "*",
     "@jdboris/stream-site": "*"
