@@ -41,7 +41,7 @@
     "@jdboris/stream-site": "file:../@local/@jdboris/stream-site.tgz"
   },
   "peerDependencies": {
-    "@jdboris/react-firebase-chat": "*",
-    "@jdboris/stream-site": "*"
+    "@jdboris/react-firebase-chat": "^1.31.3",
+    "@jdboris/stream-site": "^0.6.21"
   }
 }
