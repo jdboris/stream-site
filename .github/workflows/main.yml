@@ -20,7 +20,6 @@ jobs:
 
       - name: 🔨 Build Project
         run: |
-          export NODE_ENV=production
           npm config set @jdboris:registry=https://registry.npmjs.org
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
           npm remove @jdboris/stream-site
