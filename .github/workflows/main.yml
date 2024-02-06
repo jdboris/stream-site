@@ -13,21 +13,17 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Use Node.js 16
-        uses: actions/setup-node@v2-beta
+      - name: Use Node.js 18
+        uses: actions/setup-node@v4.0.1
         with:
-          node-version: "16"
+          node-version: "18"
 
       - name: 🔨 Build Project
         run: |
           export NODE_ENV=production
-          npm remove @jdboris/react-firebase-chat
-          npm remove @jdboris/stream-site
           npm config set @jdboris:registry=https://registry.npmjs.org
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
-          npm i @jdboris/react-firebase-chat@1.31.3 --save-exact
-          npm i @jdboris/stream-site@0.6.21 --save-exact
-          npm install
+          npm install --omit=dev
           npm run build
         env:
           CI: false
@@ -37,7 +33,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "--delete -rltgoDzvO"
-          SOURCE: "/build/"
+          SOURCE: "/dist/"
           REMOTE_HOST: ${{ secrets.SSH_SERVER }}
           REMOTE_USER: ${{ secrets.SSH_USERNAME }}
           REMOTE_PORT: ${{ secrets.SSH_PORT }}

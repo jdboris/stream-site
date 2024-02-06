@@ -8,15 +8,16 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
-    "local-install": "local-install.sh ../../@jdboris/react-firebase-chat ../../@jdboris/stream-site",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "delete-modules": "npx -y rimraf node_modules",
+    "npm-clear-cache": "npm cache clean --force",
+    "clean": "bash -c 'rm package-lock.json' & npm run delete-modules & npm run npm-clear-cache"
   },
   "eslintConfig": {
     "extends": [
