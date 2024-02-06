@@ -23,7 +23,9 @@ jobs:
           export NODE_ENV=production
           npm config set @jdboris:registry=https://registry.npmjs.org
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
-          npm install --omit=dev
+          npm remove @jdboris/stream-site
+          npm i @jdboris/stream-site
+          npm ci
           npm run build
         env:
           CI: false
