@@ -1,0 +1,1 @@
+- use $DATABASE_NAME and $DATABASE_PASSWORD everywhere in ./server

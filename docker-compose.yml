@@ -1,0 +1,58 @@
+services:
+  app:
+    restart: always
+    build:
+      dockerfile: ./Dockerfile
+      context: ./server
+      args:
+        ENVIRONMENT: ${ENVIRONMENT}
+        PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
+        PORT: ${PORT}
+
+    ports:
+      # Required for certbot challenge
+      - "80:80"
+      - "${PORT}:${PORT}"
+
+    volumes:
+      - ./apache-config:/usr/local/apache2/conf
+      - ./letsencrypt:/etc/letsencrypt
+  db:
+    restart: always
+    build:
+      dockerfile: ./Dockerfile
+      context: ./db
+      args:
+        PORT: 3306
+        MARIADB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+        MARIADB_DATABASE: ${DATABASE_NAME}
+
+    ports:
+      - 3306:3306
+
+    volumes:
+      - ./db/volumes/data:/var/lib/mysql
+
+  phpmyadmin:
+    restart: always
+    build:
+      dockerfile: ./Dockerfile
+      context: ./phpmyadmin
+      args:
+        UPLOAD_LIMIT: 100G
+        PORT: 8080
+
+    ports:
+      - 8080:8080
+
+  certbot:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./certbot
+      args:
+        CERTBOT_EMAIL: ${CERTBOT_EMAIL}
+        PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
+
+    volumes:
+      - ./certbot/volumes/www/:/var/www/certbot/:rw
+      - ./certbot/volumes/conf/:/etc/letsencrypt/:rw
