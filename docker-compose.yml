@@ -24,8 +24,8 @@ services:
       context: ./db
       args:
         PORT: 3306
-        MARIADB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
-        MARIADB_DATABASE: ${DATABASE_NAME}
+        DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+        DATABASE_NAME: ${DATABASE_NAME}
 
     ports:
       - 3306:3306
