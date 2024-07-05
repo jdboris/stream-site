@@ -3,7 +3,7 @@ services:
     restart: always
     build:
       dockerfile: ./Dockerfile
-      context: ./server
+      context: ./app
       args:
         ENVIRONMENT: ${ENVIRONMENT}
         PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
@@ -15,8 +15,8 @@ services:
       - "${PORT}:${PORT}"
 
     volumes:
-      - ./apache-config:/usr/local/apache2/conf
-      - ./letsencrypt:/etc/letsencrypt
+      - ./certbot/volumes/etc/letsencrypt:/etc/letsencrypt
+      - ./certbot/volumes/var/www/html/.well-known:/var/www/html/.well-known
   db:
     restart: always
     build:
@@ -52,7 +52,8 @@ services:
       args:
         CERTBOT_EMAIL: ${CERTBOT_EMAIL}
         PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
-
+    command: certonly -d "${PUBLIC_DOMAIN}" -d "www.${PUBLIC_DOMAIN}"
     volumes:
-      - ./certbot/volumes/www/:/var/www/certbot/:rw
-      - ./certbot/volumes/conf/:/etc/letsencrypt/:rw
+      - ./certbot/volumes/var/lib/letsencrypt/:/var/lib/letsencrypt/
+      - ./certbot/volumes/etc/letsencrypt/:/etc/letsencrypt/
+      - ./certbot/volumes/var/www/html/.well-known/:/var/www/html/.well-known/

@@ -1,3 +1,4 @@
-docker compose up
+docker compose pull
+docker compose up --build
 
 $SHELL
