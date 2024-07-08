@@ -16,9 +16,13 @@ COPY ./config/php.ini-production /usr/local/etc/php/
 
 RUN mv "/usr/local/etc/php/php.ini-${ENVIRONMENT}" "/usr/local/etc/php/php.ini"
 
-# Copy apache config files
-COPY ./config/000-default.conf /etc/apache2/sites-available/
-COPY ./config/default-ssl.conf /etc/apache2/sites-available/
+# Copy apache config file for this site
+COPY ./config/stream-site.conf /etc/apache2/sites-available/
+# "Disable" the default sites
+RUN a2dissite 000-default.conf
+RUN a2dissite default-ssl.conf
+# "Enable" this site
+RUN a2ensite stream-site.conf
 
 # Enable RewriteEngine in .htaccess
 RUN a2enmod rewrite
