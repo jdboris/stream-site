@@ -18,6 +18,7 @@ RUN mv "/usr/local/etc/php/php.ini-${ENVIRONMENT}" "/usr/local/etc/php/php.ini"
 
 # Copy apache config files
 COPY ./config/000-default.conf /etc/apache2/sites-available/
+COPY ./config/default-ssl.conf /etc/apache2/sites-available/
 
 # Enable RewriteEngine in .htaccess
 RUN a2enmod rewrite
