@@ -7,12 +7,11 @@ services:
       args:
         ENVIRONMENT: ${ENVIRONMENT}
         PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
-        PORT: ${PORT}
 
     ports:
-      # Required for certbot challenge
+      # NOTE: 80 is required for certbot challenge
       - "80:80"
-      - "${PORT}:${PORT}"
+      - "443:443"
 
     volumes:
       - ./certbot/volumes/etc/letsencrypt:/etc/letsencrypt
