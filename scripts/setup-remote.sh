@@ -1,5 +1,8 @@
 source .env
 
+echo "Uninstalling apache, if any..."
+ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'sudo apt remove apache2* -y'
+
 echo "Installing git on remote..."
 ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'sudo apt-get update && sudo apt-get install git-all -y'
 
