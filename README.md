@@ -52,3 +52,21 @@
 ```
 ./scripts/deploy.sh
 ```
+
+# View Container Logs (Local)
+
+```
+docker logs --since=1h -f stream-site-app-1
+```
+
+# View Container Logs (Remote)
+
+```
+ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'docker logs --since=1h -f stream-site-app-1'
+```
+
+# Connect to Container Shell
+
+```
+ssh -t -i ./secrets/id_rsa root@$SSH_ADDRESS 'docker exec -it stream-site-app-1 bash'
+```

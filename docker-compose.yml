@@ -54,7 +54,7 @@ services:
       args:
         CERTBOT_EMAIL: ${CERTBOT_EMAIL}
         PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
-    command: certonly -d "${PUBLIC_DOMAIN}" -d "www.${PUBLIC_DOMAIN}"
+    command: certonly -v -d "${PUBLIC_DOMAIN}" -d "www.${PUBLIC_DOMAIN}"
     volumes:
       - ./certbot/volumes/var/lib/letsencrypt/:/var/lib/letsencrypt/
       - ./certbot/volumes/etc/letsencrypt/:/etc/letsencrypt/
