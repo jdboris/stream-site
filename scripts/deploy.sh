@@ -1,12 +1,12 @@
 source .env
 
-# # Exit if the repo isn't clean
-# if ! git diff-index --quiet HEAD --; then
-#   echo "ERROR: Commit or stash all changes before continuing."
+# Exit if the repo isn't clean
+if ! git diff-index --quiet HEAD --; then
+  echo "ERROR: Commit or stash all changes before continuing."
 
-#   $SHELL
-#   exit 1
-# fi
+  $SHELL
+  exit 1
+fi
 
 echo "Pushing repo changes to origin..."
 git push origin main
