@@ -24,6 +24,7 @@ RUN a2dissite default-ssl.conf
 # "Enable" this site
 RUN a2ensite stream-site.conf
 
+RUN a2enmod ssl
 # Enable RewriteEngine in .htaccess
 RUN a2enmod rewrite
 RUN a2enmod headers
