@@ -1,3 +1,5 @@
 TODO
 
+- change to node/express
 - use $DATABASE_NAME and $DATABASE_PASSWORD everywhere in ./server
+- replace all remaining references to xxxxxxxx with environment variables

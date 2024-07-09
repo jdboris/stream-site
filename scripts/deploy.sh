@@ -20,22 +20,13 @@ ssh -i ./secrets/id_rsa root@$SSH_ADDRESS "mkdir -p /stream-site/ && cd /stream-
 # Copy/upload untracked files
 scp -i ./secrets/id_rsa -r ./.env.production root@$SSH_ADDRESS:/stream-site/.env
 
-# # Create volume folders on host (if necessary)
-# ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'mkdir -p /stream-site/db/volumes/data'
-
-# ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'mkdir -p /stream-site/certbot/volumes/var/lib/letsencrypt'
-# ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'mkdir -p /stream-site/certbot/volumes/etc/letsencrypt'
-# ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'mkdir -p /stream-site/certbot/volumes/var/www/html'
-
-# TODO:
-
 echo Building and running...
 
 # Build/run from the temporary folder
 ssh -i ./secrets/id_rsa root@$SSH_ADDRESS '
-  cd /stream-site/ && docker compose pull && docker compose up --build --force-recreate --renew-anon-volumes --detach
+  cd /stream-site/ && docker compose pull && docker compose up -f docker-compose.yml -f docker-compose-prod.yml --build --force-recreate --renew-anon-volumes --detach
 '
 
-# ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'docker system prune --all'
+ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'docker system prune --all'
 
 $SHELL

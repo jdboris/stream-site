@@ -3,12 +3,20 @@ FROM php:8.2-apache
 ARG ENVIRONMENT
 ENV ENVIRONMENT=$ENVIRONMENT
 ENV PORT=443
-# RUN echo 'SetEnv PORT ${PORT}' > /etc/apache2/conf-enabled/environment.conf
 ARG PUBLIC_DOMAIN
 ENV PUBLIC_DOMAIN=$PUBLIC_DOMAIN
-# RUN echo 'SetEnv PUBLIC_DOMAIN ${PUBLIC_DOMAIN}' > /etc/apache2/conf-enabled/environment.conf
 
 COPY ./src/ /var/www/html/
+
+# TODO:
+
+# COPY ./client/package*.json /client/
+
+# RUN cd /client && npm install
+
+# COPY ./client/ /client/
+
+# RUN cd /client && npm run build && cp -r /client/dist/* /var/www/html/
 
 # Copy PHP.inis
 COPY ./config/php.ini-development /usr/local/etc/php/

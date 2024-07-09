@@ -1,0 +1,4 @@
+# API Routing
+RewriteEngine on
+RewriteCond %{REQUEST_URI} ^/api/
+RewriteRule ^(.+)$ /utils/api.php [QSA,L]
