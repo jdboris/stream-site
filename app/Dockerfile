@@ -1,41 +1,23 @@
-FROM php:8.2-apache
+FROM node:22-alpine
 
-ARG ENVIRONMENT
-ENV ENVIRONMENT=$ENVIRONMENT
-ENV PORT=443
+ARG NODE_ENV
+ENV NODE_ENV=$NODE_ENV
 ARG PUBLIC_DOMAIN
 ENV PUBLIC_DOMAIN=$PUBLIC_DOMAIN
+ENV PORT=443
 
-COPY ./src/ /var/www/html/
+WORKDIR /app
 
-# TODO:
+COPY package*.json .
 
-# COPY ./client/package*.json /client/
+RUN npm install
 
-# RUN cd /client && npm install
+COPY . .
 
-# COPY ./client/ /client/
+RUN npm run build
+RUN apk add --no-cache inotify-tools
 
-# RUN cd /client && npm run build && cp -r /client/dist/* /var/www/html/
+CMD ["npm", "run", "start"]
 
-# Copy PHP.inis
-COPY ./config/php.ini-development /usr/local/etc/php/
-COPY ./config/php.ini-production /usr/local/etc/php/
-
-RUN mv "/usr/local/etc/php/php.ini-${ENVIRONMENT}" "/usr/local/etc/php/php.ini"
-
-# Copy apache config file for this site
-COPY ./config/stream-site.conf /etc/apache2/sites-available/
-# "Disable" the default sites
-RUN a2dissite 000-default.conf
-RUN a2dissite default-ssl.conf
-# "Enable" this site
-RUN a2ensite stream-site.conf
-
-RUN a2enmod ssl
-# Enable RewriteEngine in .htaccess
-RUN a2enmod rewrite
-RUN a2enmod headers
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-
+# NOTE: 80 is required for certbot ACME challenge
 EXPOSE 80 443

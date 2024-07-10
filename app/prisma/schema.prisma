@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model AllowedService {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  domain String @unique
+}
+
+model Banner {
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
+  url     String    @unique
+  Setting Setting[]
+}
+
+// Connected to Firebase Authentication, shares some properties
+model User {
+  id                Int           @id @default(autoincrement())
+  isStreamer        Boolean
+  uid               String        @unique
+  username          String        @unique
+  lowercaseUsername String        @unique
+  email             String
+  photoUrl          String
+  nameColor         String
+  msgBgColor        String
+  emailVerified     Boolean
+  isModerator       Boolean
+  isAdmin           Boolean
+  isBanned          Boolean
+  Channel           Channel[]
+  StreamEvent       StreamEvent[]
+  Suggestion        Suggestion[]
+}
+
+model Channel {
+  id          Int       @id @default(autoincrement())
+  creatorId   Int
+  creator     User      @relation(fields: [creatorId], references: [id])
+  service     String
+  description String
+  name        String
+  source      String
+  isSecure    Boolean
+  streamUrl   String
+  key         String
+  Setting     Setting[]
+}
+
+model Setting {
+  id             Int     @id @default(autoincrement())
+  liveChannelId  Int
+  liveChannel    Channel @relation(fields: [liveChannelId], references: [id])
+  isStreamLocked Boolean
+  announcement   String
+  isStatic       Boolean
+  bannerId       Int
+  banner         Banner  @relation(fields: [bannerId], references: [id])
+}
+
+model StreamEvent {
+  id         Int      @id @default(autoincrement())
+  title      String
+  streamerId Int
+  streamer   User     @relation(fields: [streamerId], references: [id])
+  start      DateTime
+  end        DateTime
+}
+
+model Suggestion {
+  id          Int      @id @default(autoincrement())
+  text        String
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  suggestedAt DateTime
+}

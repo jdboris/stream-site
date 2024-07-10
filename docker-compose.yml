@@ -5,13 +5,30 @@ services:
       dockerfile: ./Dockerfile
       context: ./app
       args:
-        ENVIRONMENT: ${ENVIRONMENT}
+        NODE_ENV: ${ENVIRONMENT}
         PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
 
+    develop:
+      watch:
+        - action: sync
+          path: ./app/src
+          target: /app/src
+          ignore:
+            - node_modules/
+
+        - action: rebuild
+          path: ./app/package.json
+          target: /app
+          ignore:
+            - node_modules/
+
     ports:
-      # NOTE: 80 is required for certbot challenge
+      # NOTE: 80 is required for certbot ACME challenge
       - "80:80"
       - "443:443"
+
+    # NOTE: Overriden in prod
+    command: ["npm", "run", "dev"]
 
     volumes:
       - ./certbot/volumes/etc/letsencrypt:/etc/letsencrypt
@@ -38,10 +55,11 @@ services:
       dockerfile: ./Dockerfile
       context: ./phpmyadmin
       args:
+        PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
         UPLOAD_LIMIT: 100G
-        PORT: 8443
 
     ports:
+      - 8080:8080
       - 8443:8443
 
     volumes:
