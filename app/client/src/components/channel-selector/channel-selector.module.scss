@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Jockey+One&display=swap");
+
+.channelSelector {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+
+  // font-family: "Bebas Neue", sans-serif;
+  font-family: "Jockey One", sans-serif;
+  font-size: 1.2em;
+
+  button {
+    font-family: Arial, Helvetica, sans-serif;
+    background: transparent;
+    color: #ffffff;
+    font-weight: bold;
+    border: 0.28em solid #ff0d00;
+    opacity: 0.3;
+
+    margin-right: 10px;
+  }
+
+  button:not(.lit) {
+    transition: opacity 0.15s;
+  }
+
+  button:hover {
+    opacity: 0.5;
+    filter: none;
+  }
+
+  .lit {
+    opacity: 1;
+  }
+
+  .lit:hover {
+    opacity: 1;
+  }
+}

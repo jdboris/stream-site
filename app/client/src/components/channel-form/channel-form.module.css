@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Jockey+One&display=swap");
+.channelForm {
+  font-size: 1.2em;
+  text-align: right;
+}
+.channelForm label {
+  text-align: left;
+}
+.channelForm label > div {
+  position: relative;
+}
+.channelForm label > div > .materialIcons,
+.channelForm label > div > svg {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0px;
+  bottom: 0px;
+  left: 0.4em;
+  margin: auto;
+  padding: 0.15em;
+  z-index: 1;
+}
+.channelForm label > div > svg:last-child {
+  left: initial;
+  right: 0.4em;
+  cursor: pointer;
+}
+.channelForm input {
+  width: 100%;
+  padding-right: 3.6em !important;
+  padding-left: 3.7em !important;
+}
+.channelForm .errors {
+  color: red;
+  text-align: center;
+  font-size: 0.8em;
+  margin: auto;
+}
+.channelForm.read input[name=name] {
+  background: none;
+  border: 1px solid transparent;
+  font-size: 2.1em;
+  font-family: "Jockey One", sans-serif;
+  color: #ffb657 !important;
+  padding: 0px !important;
+  text-align: center;
+}/*# sourceMappingURL=channel-form.module.css.map */

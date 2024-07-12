@@ -1,0 +1,32 @@
+.suggestionBox {
+  flex-grow: 1;
+  min-width: 340px;
+}
+.suggestionBox input[type=text] {
+  padding: 5px 9px;
+}
+.suggestionBox header .title {
+  font-size: 1.1em !important;
+}
+.suggestionBox header fieldset {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex-grow: 1;
+  margin-left: 10px;
+  flex-basis: 100px;
+}
+.suggestionBox header input {
+  width: 100%;
+  min-width: 0px;
+}
+.suggestionBox main ul li {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  background: black;
+  font-size: 0.7em;
+}
+.suggestionBox main ul li:nth-child(even) {
+  background: #080808;
+}/*# sourceMappingURL=suggestion-box.module.css.map */

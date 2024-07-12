@@ -3,8 +3,11 @@ import express from "express";
 /**
  * Logs the entire request in raw HTTP format.
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {Function} next
  */
-const requestLogger = (req, res, next) => {
+export default function requestLogger(req, res, next) {
   express.raw({ type: "*/*" })(req, res, () => {
     console.log(
       "------------------------------ REQUEST ------------------------------"
@@ -26,6 +29,4 @@ const requestLogger = (req, res, next) => {
   });
 
   next();
-};
-
-export default requestLogger;
+}

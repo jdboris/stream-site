@@ -1,0 +1,45 @@
+.suggestionBox {
+  flex-grow: 1;
+  min-width: 340px;
+
+  input[type="text"] {
+    padding: 5px 9px;
+  }
+
+  header {
+    .title {
+      font-size: 1.1em !important;
+    }
+
+    fieldset {
+      display: flex;
+      // NOTE: Overwrite the theme
+      flex-wrap: nowrap;
+      align-items: center;
+      flex-grow: 1;
+      margin-left: 10px;
+      flex-basis: 100px;
+    }
+
+    input {
+      width: 100%;
+      min-width: 0px;
+    }
+  }
+
+  main {
+    ul {
+      li {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 10px;
+        background: black;
+        font-size: 0.7em;
+      }
+
+      li:nth-child(even) {
+        background: #080808;
+      }
+    }
+  }
+}

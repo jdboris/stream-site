@@ -1,0 +1,24 @@
+.outer {
+  .inner {
+    position: relative;
+    width: 100%;
+    max-width: 100vw;
+    // NOTE: Height will come from the padding to maintain 16:9 aspect ratio
+    // height: 480px;
+
+    // NOTE: Maintains a 16:9 aspect ratio, but contents must be position: absolute to ignore this padding
+    padding-bottom: 56.25%;
+
+    .stream {
+      position: absolute;
+
+      width: 100%;
+      height: 100%;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+.schedule {
+  position: relative;
+  flex-grow: 6;
+  flex-basis: 400px;
+  max-width: 100%;
+  max-height: 400px;
+  min-height: 365px;
+  position: relative;
+  min-width: 0;
+}/*# sourceMappingURL=schedule.module.css.map */

@@ -1,0 +1,124 @@
+$border-color: #2c2c2c;
+$cell-border: #121212;
+$out-of-range-bg-color: #121212;
+$today-highlight-bg: none !important;
+$calendar-border: black;
+
+$event-bg: #e7dfd5 !default;
+$event-border: darken($event-bg, 10%) !default;
+$event-outline: #b9a892 !default;
+$event-color: black !default;
+
+.rbc-day-bg {
+  background: black;
+}
+
+@import "react-big-calendar/lib/sass/styles";
+
+.rbc-calendar {
+  font-size: 0.7em;
+  color: #ccc;
+  z-index: 1;
+  position: relative;
+
+  a:visited {
+    color: unset;
+  }
+
+  .rbc-toolbar {
+    position: relative;
+    justify-content: flex-start;
+
+    // Changing the "month" button into an "x" svg
+    > .rbc-btn-group:last-child > button {
+      padding: 0.2em 0.35em;
+
+      background: initial !important;
+      border-radius: initial !important;
+    }
+
+    > .rbc-btn-group:last-child > button > svg {
+      font-size: 1.5em;
+      vertical-align: middle;
+    }
+
+    > .rbc-btn-group:last-child > button:hover > svg {
+      opacity: 1;
+    }
+
+    // Hide the "day" button
+    > .rbc-btn-group:last-child > button.rbc-active {
+      display: none;
+    }
+
+    button:hover,
+    .rbc-active {
+      color: black !important;
+      background: #b9a892 !important;
+      border-radius: 3px !important;
+    }
+  }
+
+  button {
+    padding: 5px 9px;
+    border-radius: 3px;
+    line-height: 1.15;
+    border: none;
+    background: none !important;
+  }
+
+  .rbc-toolbar-label {
+    flex-grow: 0;
+    font-family: "Jockey One", sans-serif;
+    color: #ffb657 !important;
+    font-size: 1.1em !important;
+    text-align: left;
+  }
+
+  .rbc-button-link {
+    padding: 5px;
+    color: gray;
+  }
+
+  > *:nth-child(2) {
+    border-radius: 3px;
+    background: #0c0c0c;
+    padding: 10px;
+  }
+
+  .rbc-header {
+    border: none;
+    margin-bottom: 3px;
+  }
+
+  .rbc-month-view .rbc-current .rbc-button-link {
+    border: 1px solid #ccc;
+    border-left: 1px solid #ccc !important;
+  }
+
+  .rbc-date-cell a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    height: 1.15em;
+    width: 1.5em;
+    font-size: 1.1em;
+    color: #ff7900;
+
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .rbc-off-range-bg + .rbc-off-range-bg {
+    border-left: 1px solid black;
+  }
+
+  .rbc-event {
+    font-weight: bold;
+  }
+
+  .rbc-show-more {
+    background: none;
+  }
+}

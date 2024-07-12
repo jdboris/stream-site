@@ -2,9 +2,14 @@ import { createServer } from "https";
 import express from "express";
 import { config } from "dotenv";
 config();
+import session from "express-session";
+import { fileURLToPath } from "url";
+import path from "path";
 
-// import usersRouter from "./routes/users.js";
-// import webhookTargetsRouter from "./routes/webhook-targets.js";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import authRouter from "./routes/auth.js";
 import requestLogger from "./utils/request-logger.js";
 import { readFileSync } from "fs";
 
@@ -19,14 +24,27 @@ if (process.env.NODE_ENV != "production") {
 app.use(express.static("./client/dist"));
 
 app.use(express.json());
+app.use(
+  session({
+    secret: await readFileSync(
+      path.resolve(__dirname, "../secrets/session-key.key"),
+      "utf8"
+    ),
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: true },
+  })
+);
 
-// app.use(usersRouter);
+app.use(authRouter);
 
 const privateKey = readFileSync(
-  `/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`
+  `/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`,
+  "utf8"
 );
 const certificate = readFileSync(
-  `/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`
+  `/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`,
+  "utf8"
 );
 
 createServer(

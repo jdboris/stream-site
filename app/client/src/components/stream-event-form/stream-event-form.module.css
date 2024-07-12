@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Jockey+One&display=swap");
+.streamEventForm {
+  font-size: 1.2em;
+  text-align: right;
+}
+.streamEventForm .hidden {
+  visibility: hidden;
+}
+.streamEventForm label {
+  text-align: left;
+  width: 100%;
+}
+.streamEventForm label > div {
+  position: relative;
+}
+.streamEventForm label > div > .materialIcons,
+.streamEventForm label > div > svg {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0px;
+  bottom: 0px;
+  left: 0.4em;
+  margin: auto;
+  padding: 0.15em;
+  z-index: 1;
+}
+.streamEventForm label > div > svg:last-child {
+  left: initial;
+  right: 0.4em;
+  cursor: pointer;
+}
+.streamEventForm button {
+  margin-left: 0.5em;
+}
+.streamEventForm.read label {
+  text-align: center;
+}
+.streamEventForm input {
+  width: 100%;
+  padding-right: 3.6em !important;
+  padding-left: 3.7em !important;
+}
+.streamEventForm .row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.streamEventForm .row label > div {
+  position: initial;
+}
+.streamEventForm .row input {
+  padding: 13px !important;
+}
+.streamEventForm.read .row {
+  justify-content: center;
+}
+.streamEventForm .errors {
+  color: red;
+  text-align: center;
+  font-size: 0.8em;
+  width: 100%;
+}
+.streamEventForm .title {
+  font-size: 1.8em;
+  font-family: "Jockey One", sans-serif;
+  color: #ffb657;
+  padding: 10px;
+  text-align: center;
+  margin-top: -0.4em;
+  width: 100%;
+  width: 100%;
+}
+.streamEventForm .time {
+  font-size: 1.4em;
+  margin-bottom: 0.2em;
+}/*# sourceMappingURL=stream-event-form.module.css.map */

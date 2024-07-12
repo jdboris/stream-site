@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Jockey+One&display=swap");
+
+.streamEventForm {
+  font-size: 1.2em;
+  text-align: right;
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  label {
+    text-align: left;
+    width: 100%;
+
+    > div {
+      position: relative;
+
+      > .materialIcons,
+      > svg {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        top: 0px;
+        bottom: 0px;
+        left: 0.4em;
+        margin: auto;
+        padding: 0.15em;
+        z-index: 1;
+      }
+
+      > svg:last-child {
+        left: initial;
+        right: 0.4em;
+        cursor: pointer;
+      }
+    }
+  }
+
+  button {
+    margin-left: 0.5em;
+  }
+
+  &.read label {
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    padding-right: 3.6em !important;
+    padding-left: 3.7em !important;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    label > div {
+      position: initial;
+    }
+
+    input {
+      padding: 13px !important;
+    }
+  }
+
+  &.read .row {
+    justify-content: center;
+  }
+
+  .errors {
+    color: red;
+    text-align: center;
+    font-size: 0.8em;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 1.8em;
+    font-family: "Jockey One", sans-serif;
+    color: #ffb657;
+    padding: 10px;
+    text-align: center;
+    margin-top: -0.4em;
+    width: 100%;
+    width: 100%;
+  }
+
+  .time {
+    font-size: 1.4em;
+    margin-bottom: 0.2em;
+  }
+
+  // input[name="start"],
+  // input[name="end"] {
+  //   width: auto;
+  // }
+}

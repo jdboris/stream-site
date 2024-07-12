@@ -7,8 +7,10 @@ ENV PUBLIC_DOMAIN=$PUBLIC_DOMAIN
 ENV PORT=443
 
 WORKDIR /app
+RUN mkdir client
 
 COPY package*.json .
+COPY client/package*.json client
 
 RUN npm install
 

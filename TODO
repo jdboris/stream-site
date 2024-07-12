@@ -1,7 +1,7 @@
 TODO
 
 - change to node/express
+  - Translate all PHP to JS
 - use $DATABASE_NAME and $DATABASE_PASSWORD everywhere in ./server
 - replace all remaining references to xxxxxxxx with environment variables
 - replace PORT 2053 with 443 everywhere
-- confirm that process.env gets actual environment variables, not just ones in .env (i.e. PORT)

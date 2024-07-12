@@ -5,24 +5,30 @@ use Api\HttpError;
 require_once "dtos/dto.php";
 require_once "dtos/user.php";
 
-class StreamEvent extends Dto {
-    static function getTableName() {
+class StreamEvent extends Dto
+{
+    static function getTableName()
+    {
         return "stream_events";
     }
 
-    static function canUserCreate(?Full\User $user): bool {
+    static function canUserCreate(?Full\User $user): bool
+    {
         return $user && ($user->isStreamer || $user->isAdmin);
     }
 
-    static function canUserRead(?Full\User $user): bool {
+    static function canUserRead(?Full\User $user): bool
+    {
         return true;
     }
 
-    static function canUserUpdate(?Full\User $user): bool {
+    static function canUserUpdate(?Full\User $user): bool
+    {
         return $user && ($user->isStreamer || $user->isAdmin);
     }
 
-    static function canUserDelete(?Full\User $user, $dto): bool {
+    static function canUserDelete(?Full\User $user, $dto): bool
+    {
         return $user && ($user->isStreamer || $user->isAdmin);
     }
 
@@ -36,7 +42,8 @@ class StreamEvent extends Dto {
     public $start;
     public $end;
 
-    public function validate(): bool {
+    public function validate(): bool
+    {
         if (empty($this->title)) {
             throw new HttpError("Title required.", 400);
         }

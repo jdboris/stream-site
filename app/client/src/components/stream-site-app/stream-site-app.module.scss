@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,700;1,800;1,900&display=swap");
+
+.streamSite {
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 20px;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  > header,
+  > main,
+  > footer {
+    display: flex;
+    justify-content: center;
+  }
+
+  > main {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    left: 0px;
+    right: 0px;
+    transition: max-width 0.2s;
+
+    > div {
+      flex-grow: 1;
+    }
+  }
+
+  // =====================================================================================
+  // NOTE: The following will let the stream set the max height in its row,
+  //       give it a min width limit of 854px before it moves the chat to the next row,
+  //       and give the chat a min height of 400px (for when it moves to the next row),
+  //       and give the chat a max width of 340px while in the first row,
+  //       and prevent the contents of the chat from stretching its width wider than that.
+  // Source: https://stackoverflow.com/a/49065029
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    border: 1px solid #ff7900;
+  }
+
+  .stream {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 700px;
+    min-width: calc(100% - 350px);
+  }
+
+  .chat {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 400px;
+    // NOTE: Required to limit the width when chat should be in the first row
+    width: 0px;
+    min-width: 340px;
+  }
+
+  .chat > *:first-child {
+    flex-basis: 0px;
+    flex-grow: 1;
+    overflow-y: auto;
+    // NOTE: overflow-y: auto seems to set overflow-x to auto as well
+    overflow-x: hidden;
+  }
+
+  // =====================================================================================
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.7em;
+
+    > * {
+      margin-bottom: 0.7em;
+    }
+  }
+}

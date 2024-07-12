@@ -1,0 +1,11 @@
+.schedule {
+  position: relative;
+  flex-grow: 6;
+  flex-basis: 400px;
+  max-width: 100%;
+  max-height: 400px;
+  min-height: 365px;
+  position: relative;
+  // NOTE: Required to fix the schedule growing too wide with long calendar events
+  min-width: 0;
+}

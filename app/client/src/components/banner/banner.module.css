@@ -1,0 +1,25 @@
+.banner {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  max-width: 100vw;
+  justify-content: center;
+}
+.banner:hover .controls > *,
+.banner .controls:hover > *,
+.banner .controls.loading > *,
+.banner .controls > *:hover {
+  margin-top: initial;
+  opacity: 1;
+  transition: margin-top 0s 0s;
+}
+.banner .controls > * {
+  margin-top: -999%;
+  top: 0px;
+  opacity: 0;
+  transition: margin-top 0s 0.5s, opacity 0.4s 0s;
+}
+.banner .controls {
+  position: absolute;
+  top: 0px;
+}/*# sourceMappingURL=banner.module.css.map */
