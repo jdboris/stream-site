@@ -1,0 +1,3 @@
+[submodule "app/client/react-firebase-chat"]
+	path = app/client/react-firebase-chat
+	url = https://github.com/jdboris/react-firebase-chat.git
