@@ -7,17 +7,21 @@ ENV PUBLIC_DOMAIN=$PUBLIC_DOMAIN
 ENV PORT=443
 
 WORKDIR /app
-RUN mkdir client
+
+RUN mkdir -p client/react-firebase-chat
 
 COPY package*.json .
 COPY client/package*.json client
+COPY client/react-firebase-chat/package*.json client/react-firebase-chat/
 
 RUN npm install
 
 COPY . .
 
+# NOTE: Repeat install as workaround for symlink package bug
+RUN cd client && npm install react-firebase-chat
+
 RUN npm run build
-RUN apk add --no-cache inotify-tools
 
 CMD ["npm", "run", "start"]
 

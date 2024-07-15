@@ -1,5 +1,5 @@
 docker compose down
 docker compose pull
-docker compose -p stream-site up --build --watch
+docker compose --progress=plain -p stream-site build --no-cache && docker compose --progress=plain -p stream-site up --watch
 
 $SHELL

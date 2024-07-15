@@ -1,15 +1,16 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./src/index.js",
   "type": "module",
   "scripts": {
     "dev": "npm run start:watch",
-    "start:watch": "nodemon ./src/index.js",
+    "start:watch": "nodemon --env-file=.env.dev ./src/index.js ",
     "db:migrate": "npx prisma migrate dev",
-    "preinstall": "cd ./client && npm i",
+    "preinstall": "cd client && npm i",
     "build": "npx prisma generate && cd client && npm run build",
-    "start": "npx wait-on tcp:stream-site-db-1:5432 && npx prisma migrate deploy && node ./src/index.js"
+    "start": "npx wait-on tcp:stream-site-db-1:5432 && npx prisma migrate deploy && node ./src/index.js",
+    "clean": "npx rimraf --glob **/node_modules && npx rimraf --glob **/package-lock.json"
   },
   "author": "",
   "license": "UNLICENSED",
@@ -24,7 +25,6 @@
   },
   "dependencies": {
     "@prisma/client": "^5.16.2",
-    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "nodemon": "^3.1.4"

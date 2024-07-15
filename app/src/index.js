@@ -1,7 +1,5 @@
 import { createServer } from "https";
 import express from "express";
-import { config } from "dotenv";
-config();
 import session from "express-session";
 import { fileURLToPath } from "url";
 import path from "path";
@@ -14,6 +12,7 @@ import requestLogger from "./utils/request-logger.js";
 import { readFileSync } from "fs";
 
 const { PORT, PUBLIC_DOMAIN } = process.env;
+
 const app = express();
 
 if (process.env.NODE_ENV != "production") {
@@ -39,11 +38,17 @@ app.use(
 app.use(authRouter);
 
 const privateKey = readFileSync(
-  `/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`,
+  path.resolve(
+    __dirname,
+    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`
+  ),
   "utf8"
 );
 const certificate = readFileSync(
-  `/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`,
+  path.resolve(
+    __dirname,
+    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`
+  ),
   "utf8"
 );
 
