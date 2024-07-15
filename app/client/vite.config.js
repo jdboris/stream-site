@@ -10,7 +10,7 @@ export default defineConfig({
       "/api": {
         target: "https://localhost:443",
         changeOrigin: true,
-        secure: true,
+        secure: false,
         ws: true,
       },
     },

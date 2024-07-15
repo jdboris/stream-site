@@ -4,4 +4,3 @@ TODO
   - Translate all PHP to JS
 - use $DATABASE_NAME and $DATABASE_PASSWORD everywhere in ./server
 - replace all remaining references to xxxxxxxx with environment variables
-- replace PORT 2053 with 443 everywhere
