@@ -1,0 +1,10 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "userPresences": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}

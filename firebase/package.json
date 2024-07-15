@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "preinstall": "cd functions && npm i",
+    "start": "npm run emulators",
+    "emulators": "firebase --debug emulators:start"
+  },
+  "dependencies": {
+    "firebase-tools": "^13.5.2"
+  }
+}

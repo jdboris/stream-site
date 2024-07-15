@@ -3,6 +3,8 @@ services:
     command: ""
     watch:
 
+  firebase: {}
+
   certbot:
     build:
       dockerfile: ./Dockerfile

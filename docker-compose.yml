@@ -71,8 +71,29 @@ services:
         UPLOAD_LIMIT: 100G
 
     ports:
-      - 8080:8080
-      - 8443:8443
+      - 3000:3000
+      - 3443:3443
 
     volumes:
       - ./certbot/volumes/etc/letsencrypt:/etc/letsencrypt
+
+  firebase:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./firebase
+      args:
+        FIREBASE_TOKEN: ${FIREBASE_TOKEN}
+
+    ports:
+      - 9099:9099
+      - 5000:5000
+      - 8080:8080
+      - 9000:9000
+      - 9199:9199
+      - 4000:4000
+      - 4500:4500
+      - 9150:9150
+      - 9299:9299
+
+    volumes:
+      - ./volumes/.cache:/root/.cache/firebase/emulators
