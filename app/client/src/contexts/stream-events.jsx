@@ -1,5 +1,4 @@
-import { useContext, useState, createContext, useCallback } from "react";
-import { API_URL } from "../utils/utils";
+import { createContext, useCallback, useContext, useState } from "react";
 
 const StreamEventContext = createContext(null);
 
@@ -68,7 +67,7 @@ export function StreamEventProvider({ useAuth, children }) {
     setLoading(true);
     try {
       const response = await fetch(
-        `${API_URL}api/stream-event/all?month=${month}&year=${year}`,
+        `/api/stream-event/all?month=${month}&year=${year}`,
         {
           method: "GET",
           credentials: "include",
@@ -99,7 +98,7 @@ export function StreamEventProvider({ useAuth, children }) {
       streamEvent = { ...streamEvent };
       delete streamEvent.streamer;
 
-      const response = await fetch(API_URL + "api/stream-event", {
+      const response = await fetch("/api/stream-event", {
         method: streamEvent.id ? "PUT" : "POST",
         body: JSON.stringify({
           ...streamEvent,
@@ -134,7 +133,7 @@ export function StreamEventProvider({ useAuth, children }) {
       delete streamEvent.streamer;
 
       try {
-        const response = await fetch(API_URL + "api/stream-event", {
+        const response = await fetch("/api/stream-event", {
           method: "DELETE",
           body: JSON.stringify(streamEvent),
           credentials: "include",

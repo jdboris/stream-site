@@ -1,6 +1,5 @@
 import { getIdToken } from "firebase/auth";
 import { createContext, useCallback, useContext, useState } from "react";
-import { API_URL } from "../utils/utils";
 
 const FirebaseAuthContext = createContext(null);
 
@@ -27,7 +26,7 @@ export function FirebaseAuthProvider({ children }) {
   const login = useCallback(async (authUser) => {
     const token = await getIdToken(authUser, true);
 
-    return await fetch(API_URL + "api/auth/login", {
+    return await fetch("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({
         idToken: token,
@@ -37,7 +36,7 @@ export function FirebaseAuthProvider({ children }) {
   }, []);
 
   async function logout() {
-    return await fetch(API_URL + "api/auth/logout", {
+    return await fetch("/api/auth/logout", {
       method: "GET",
       credentials: "include",
     });

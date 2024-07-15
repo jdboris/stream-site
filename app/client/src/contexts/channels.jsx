@@ -5,7 +5,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { API_URL } from "../utils/utils";
 
 const ChannelContext = createContext(null);
 
@@ -48,7 +47,7 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
   const readAll = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(API_URL + "api/channel/all", {
+      const response = await fetch("/api/channel/all", {
         method: "GET",
         credentials: "include",
       });
@@ -66,7 +65,7 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
   const readLiveChannel = useCallback(async (forceRefresh = false) => {
     try {
       setLoading(true);
-      const response = await fetch(API_URL + "api/channel", {
+      const response = await fetch("/api/channel", {
         method: "GET",
         credentials: "include",
       });
@@ -108,7 +107,7 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
   const saveChannel = useCallback(async (channel) => {
     try {
       setLoading(true);
-      const response = await fetch(API_URL + "api/channel", {
+      const response = await fetch("/api/channel", {
         method: channel.id ? "PUT" : "POST",
         body: JSON.stringify(channel),
         credentials: "include",
@@ -132,7 +131,7 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
   const deleteChannel = useCallback(async (channel) => {
     try {
       setLoading(true);
-      const response = await fetch(API_URL + "api/channel", {
+      const response = await fetch("/api/channel", {
         method: "DELETE",
         body: JSON.stringify(channel),
         credentials: "include",

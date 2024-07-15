@@ -1,6 +1,4 @@
 import { createContext, useCallback, useContext, useState } from "react";
-import { API_URL } from "../utils/utils";
-
 const SuggestionsContext = createContext(null);
 
 export function useSuggestions() {
@@ -36,7 +34,7 @@ export function SuggestionsProvider({ children }) {
     setLoading(true);
     try {
       const response = await fetch(
-        `${API_URL}api/suggestion/all?page=${page}&itemsPerPage=${itemsPerPage}`,
+        `/api/suggestion/all?page=${page}&itemsPerPage=${itemsPerPage}`,
         {
           method: "GET",
           credentials: "include",
@@ -58,7 +56,7 @@ export function SuggestionsProvider({ children }) {
   async function saveSuggestion(suggestion) {
     try {
       setLoading(true);
-      const response = await fetch(API_URL + "api/suggestion", {
+      const response = await fetch("/api/suggestion", {
         method: suggestion.id ? "PUT" : "POST",
         body: JSON.stringify(suggestion),
         credentials: "include",
@@ -79,7 +77,7 @@ export function SuggestionsProvider({ children }) {
     setLoading(true);
 
     try {
-      const response = await fetch(API_URL + "api/suggestion", {
+      const response = await fetch("/api/suggestion", {
         method: "DELETE",
         body: JSON.stringify(suggestion),
         credentials: "include",

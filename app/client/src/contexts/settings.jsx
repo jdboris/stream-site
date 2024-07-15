@@ -1,11 +1,11 @@
 import {
-  useContext,
-  useState,
   createContext,
-  useEffect,
   useCallback,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
-import { API_URL, tryOperation } from "../utils/utils";
+import { tryOperation } from "../utils/utils";
 
 const SettingsContext = createContext(null);
 
@@ -29,7 +29,7 @@ export function SettingsProvider({ children, setErrors }) {
           ...updateData,
         }));
 
-        const response = await fetch(API_URL + "api/settings", {
+        const response = await fetch("/api/settings", {
           method: "PUT",
           body: JSON.stringify(updateData),
           credentials: "include",
@@ -57,7 +57,7 @@ export function SettingsProvider({ children, setErrors }) {
   const readAll = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch(API_URL + "api/settings", {
+      const response = await fetch("/api/settings", {
         method: "GET",
         credentials: "include",
       });
@@ -72,7 +72,7 @@ export function SettingsProvider({ children, setErrors }) {
   }, []);
 
   const readAllBanners = useCallback(async () => {
-    const response = await fetch(API_URL + "api/banner/all", {
+    const response = await fetch("/api/banner/all", {
       method: "GET",
       credentials: "include",
     });

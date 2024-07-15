@@ -13,19 +13,31 @@ services:
         - action: sync
           path: ./app/src
           target: /app/src
-          ignore:
-            - node_modules/
+
+        - action: sync
+          path: ./app/client/src
+          target: /app/client/src
+
+        - action: sync
+          path: ./app/client/react-firebase-chat/src
+          target: /app/client/react-firebase-chat/src
 
         - action: rebuild
           path: ./app/package.json
           target: /app
-          ignore:
-            - node_modules/
+
+        - action: rebuild
+          path: ./app/client/package.json
+          target: /app/client
+
+        - action: rebuild
+          path: ./app/client/react-firebase-chat/package.json
+          target: /app/client/react-firebase-chat
 
     ports:
       # NOTE: 80 is required for certbot ACME challenge
-      - "80:80"
-      - "443:443"
+      - "80:${APP_PORT}"
+      - "443:${APP_PORT}"
 
     # NOTE: Overriden in prod
     command: ["npm", "run", "dev"]
