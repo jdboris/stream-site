@@ -1,8 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Router } from "express";
-import HttpError from "../utils/http-error.js";
-import ChannelDto from "../dots/channel-dto.js";
 import { getCurrentUser } from "../utils/auth.js";
+import HttpError from "../utils/http-error.js";
 
 const prisma = new PrismaClient();
 const router = Router();
@@ -59,16 +58,12 @@ router.post("/api/stream-events", async (req, res) => {
     throw new HttpError("Permission denied.", 403);
   }
 
-  const { title, streamerId, start, end } = req.body;
-
-  if (streamerId != user.id && !user.isAdmin) {
-    throw new HttpError("Permission denied.", 403);
-  }
+  const { title, start, end } = req.body;
 
   await prisma.streamEvent.create({
     data: {
       title,
-      streamerId,
+      streamerId: user.id,
       start,
       end,
     },
