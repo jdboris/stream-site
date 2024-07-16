@@ -51,3 +51,12 @@ export async function getUser(authToken) {
 
   return user;
 }
+
+/** @param {import("express").Request} req  */
+export async function getCurrentUser(req) {
+  if (!req.session.token) {
+    return null;
+  }
+
+  return await getUser(req.session.token);
+}

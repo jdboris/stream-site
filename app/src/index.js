@@ -8,6 +8,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 import authRouter from "./routes/auth.js";
+import bannersRouter from "./routes/banners.js";
+import channelsRouter from "./routes/channels.js";
 import requestLogger from "./utils/request-logger.js";
 import { readFileSync } from "fs";
 
@@ -35,7 +37,10 @@ app.use(
   })
 );
 
+// Routers
 app.use(authRouter);
+app.use(bannersRouter);
+app.use(channelsRouter);
 
 const privateKey = readFileSync(
   path.resolve(

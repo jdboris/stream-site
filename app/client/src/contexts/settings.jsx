@@ -72,7 +72,7 @@ export function SettingsProvider({ children, setErrors }) {
   }, []);
 
   const readAllBanners = useCallback(async () => {
-    const response = await fetch("/api/banner/all", {
+    const response = await fetch("/api/banners/all", {
       method: "GET",
       credentials: "include",
     });

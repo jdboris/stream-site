@@ -47,7 +47,7 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
   const readAll = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/channel/all", {
+      const response = await fetch("/api/channels/all", {
         method: "GET",
         credentials: "include",
       });
@@ -65,7 +65,7 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
   const readLiveChannel = useCallback(async (forceRefresh = false) => {
     try {
       setLoading(true);
-      const response = await fetch("/api/channel", {
+      const response = await fetch("/api/channels/live", {
         method: "GET",
         credentials: "include",
       });
@@ -107,7 +107,7 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
   const saveChannel = useCallback(async (channel) => {
     try {
       setLoading(true);
-      const response = await fetch("/api/channel", {
+      const response = await fetch("/api/channels", {
         method: channel.id ? "PUT" : "POST",
         body: JSON.stringify(channel),
         credentials: "include",
@@ -131,7 +131,7 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
   const deleteChannel = useCallback(async (channel) => {
     try {
       setLoading(true);
-      const response = await fetch("/api/channel", {
+      const response = await fetch("/api/channels", {
         method: "DELETE",
         body: JSON.stringify(channel),
         credentials: "include",
