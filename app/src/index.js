@@ -16,6 +16,7 @@ import suggestionsRouter from "./routes/suggestions.js";
 
 import requestLogger from "./utils/request-logger.js";
 import { readFileSync } from "fs";
+import HttpError from "./utils/http-error.js";
 
 const { PORT, PUBLIC_DOMAIN } = process.env;
 
@@ -48,6 +49,29 @@ app.use(channelsRouter);
 app.use(settingsRouter);
 app.use(streamEventsRouter);
 app.use(suggestionsRouter);
+
+app.use(
+  /**
+   * @param {Error} error
+   * @param {import("express").Request} req
+   * @param {import("express").Response} res
+   * @param {import("express").NextFunction} next
+   *
+   **/
+  async (error, req, res, next) => {
+    if (error instanceof HttpError) {
+      res.status(error.status).send({
+        error: error.message,
+      });
+      return;
+    }
+
+    console.error(error);
+    res.status(500).send({
+      error: "Something went wrong. Please try again.",
+    });
+  }
+);
 
 const privateKey = readFileSync(
   path.resolve(
