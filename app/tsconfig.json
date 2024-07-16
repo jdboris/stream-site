@@ -6,8 +6,9 @@
     "moduleResolution": "node",
     "strict": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "skipLibCheck": true
   },
   "include": ["./src/**/*.js"],
-  "exclude": ["node_modules"]
+  "exclude": ["**/node_modules"]
 }
