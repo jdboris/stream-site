@@ -47,11 +47,11 @@ export class StreamEvent {
       // NOTE: Must replace "-" with "/" for Date.parse to work in firefox
       this.start =
         typeof this.start === "string"
-          ? new Date(Date.parse(this.start.replace(/-/g, "/") + " UTC"))
+          ? new Date(Date.parse(this.start))
           : this.start;
       this.end =
         typeof this.end === "string"
-          ? new Date(Date.parse(this.end.replace(/-/g, "/") + " UTC"))
+          ? new Date(Date.parse(this.end))
           : this.end;
     }
   }
