@@ -45,7 +45,6 @@ router.post("/api/channels", async (req, res) => {
   }
 
   const {
-    creatorId,
     service,
     description,
     name,
@@ -58,7 +57,7 @@ router.post("/api/channels", async (req, res) => {
 
   await prisma.channel.create({
     data: {
-      creatorId,
+      creatorId: user.id,
       service,
       description,
       name,
