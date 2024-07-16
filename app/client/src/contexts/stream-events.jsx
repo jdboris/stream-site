@@ -67,7 +67,7 @@ export function StreamEventProvider({ useAuth, children }) {
     setLoading(true);
     try {
       const response = await fetch(
-        `/api/stream-event/all?month=${month}&year=${year}`,
+        `/api/stream-events/all?month=${month}&year=${year}`,
         {
           method: "GET",
           credentials: "include",
@@ -98,7 +98,7 @@ export function StreamEventProvider({ useAuth, children }) {
       streamEvent = { ...streamEvent };
       delete streamEvent.streamer;
 
-      const response = await fetch("/api/stream-event", {
+      const response = await fetch("/api/stream-events", {
         method: streamEvent.id ? "PUT" : "POST",
         body: JSON.stringify({
           ...streamEvent,
@@ -133,7 +133,7 @@ export function StreamEventProvider({ useAuth, children }) {
       delete streamEvent.streamer;
 
       try {
-        const response = await fetch("/api/stream-event", {
+        const response = await fetch("/api/stream-events", {
           method: "DELETE",
           body: JSON.stringify(streamEvent),
           credentials: "include",

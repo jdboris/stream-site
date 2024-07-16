@@ -1,5 +1,6 @@
 TODO
 
+- BUG: Stream events aren't rendering on the calendar
 - change to node/express
   - Translate all PHP to JS
 - use $DATABASE_NAME and $DATABASE_PASSWORD everywhere in ./server
