@@ -10,6 +10,7 @@ const __dirname = path.dirname(__filename);
 import authRouter from "./routes/auth.js";
 import bannersRouter from "./routes/banners.js";
 import channelsRouter from "./routes/channels.js";
+import settingsRouter from "./routes/settings.js";
 import requestLogger from "./utils/request-logger.js";
 import { readFileSync } from "fs";
 
@@ -41,6 +42,7 @@ app.use(
 app.use(authRouter);
 app.use(bannersRouter);
 app.use(channelsRouter);
+app.use(settingsRouter);
 
 const privateKey = readFileSync(
   path.resolve(
