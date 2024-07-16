@@ -34,7 +34,7 @@ export function SuggestionsProvider({ children }) {
     setLoading(true);
     try {
       const response = await fetch(
-        `/api/suggestion/all?page=${page}&itemsPerPage=${itemsPerPage}`,
+        `/api/suggestions/all?page=${page}&itemsPerPage=${itemsPerPage}`,
         {
           method: "GET",
           credentials: "include",
@@ -56,7 +56,7 @@ export function SuggestionsProvider({ children }) {
   async function saveSuggestion(suggestion) {
     try {
       setLoading(true);
-      const response = await fetch("/api/suggestion", {
+      const response = await fetch("/api/suggestions", {
         method: suggestion.id ? "PUT" : "POST",
         body: JSON.stringify(suggestion),
         credentials: "include",
@@ -77,7 +77,7 @@ export function SuggestionsProvider({ children }) {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/suggestion", {
+      const response = await fetch("/api/suggestions", {
         method: "DELETE",
         body: JSON.stringify(suggestion),
         credentials: "include",

@@ -12,6 +12,7 @@ import bannersRouter from "./routes/banners.js";
 import channelsRouter from "./routes/channels.js";
 import settingsRouter from "./routes/settings.js";
 import streamEventsRouter from "./routes/stream-events.js";
+import suggestionsRouter from "./routes/suggestions.js";
 
 import requestLogger from "./utils/request-logger.js";
 import { readFileSync } from "fs";
@@ -46,6 +47,7 @@ app.use(bannersRouter);
 app.use(channelsRouter);
 app.use(settingsRouter);
 app.use(streamEventsRouter);
+app.use(suggestionsRouter);
 
 const privateKey = readFileSync(
   path.resolve(
