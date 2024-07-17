@@ -27,7 +27,7 @@ if (process.env.NODE_ENV != "production") {
   app.use(requestLogger);
 }
 
-app.use(express.static("./client/dist"));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use(express.json());
 app.use(
