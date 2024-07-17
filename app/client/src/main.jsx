@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     footerLinks={[
       <a
         key={`footer-link-0`}
-        href="https://discord.gg/9KQd2AB3ZA"
+        href={import.meta.VITE_DISCORD_URL}
         target="_blank"
         rel="noreferrer"
       >
@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </a>,
       <a
         key={`footer-link-1`}
-        href="https://steamcommunity.com/groups/xxxxxxxx-2"
+        href={import.meta.VITE_STEAM_GROUP_URL}
         target="_blank"
         rel="noreferrer"
       >

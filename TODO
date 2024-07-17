@@ -1,7 +1,9 @@
 TODO
 
-- BUG: Stream events aren't rendering on the calendar
-- change to node/express
-  - Translate all PHP to JS
 - use $DATABASE_NAME and $DATABASE_PASSWORD everywhere in ./server
-- replace all remaining references to xxxxxxxx with environment variables
+- scrub the following from git history
+  - hard-coded site name
+  - images
+  - browserconfig.xml
+  - manifest.json
+  - site.webmanifest
