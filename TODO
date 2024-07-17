@@ -1,9 +1,12 @@
 TODO
 
-- use $DATABASE_NAME and $DATABASE_PASSWORD everywhere in ./server
 - scrub the following from git history
+  - hard-coded firebase project name
   - hard-coded site name
+  - hard-coded database name
   - images
   - browserconfig.xml
   - manifest.json
   - site.webmanifest
+- eliminate redundant coppy of firebase functions
+  - point emulator service to the firebase files in react-firebase-chat directory
