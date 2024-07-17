@@ -21,7 +21,7 @@ export default function requestLogger(req, res, next) {
         // Convert raw headers array into key/value pairs with ':' between
         (total, x, i) => total + (i % 2 == 0 ? x : `: ${x}\r\n`),
         ""
-      )}\r\n${req.body}`
+      )}\r\n${req.body?.toString() || ""}`
     );
     console.log(
       "---------------------------- REQUEST END ----------------------------"
