@@ -1,5 +1,8 @@
 FROM phpmyadmin:latest
 
+ARG PORT
+ENV PORT=$PORT
+
 ARG PUBLIC_DOMAIN
 ENV PUBLIC_DOMAIN=$PUBLIC_DOMAIN
 
@@ -26,4 +29,4 @@ RUN a2enmod rewrite
 RUN a2enmod headers
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-EXPOSE 8080 8443
+EXPOSE $PORT
