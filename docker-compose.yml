@@ -69,10 +69,10 @@ services:
       args:
         PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
         UPLOAD_LIMIT: 100G
+        PORT: 3000
 
     ports:
       - 3000:3000
-      - 3443:3443
 
     volumes:
       - ./certbot/volumes/etc/letsencrypt:/etc/letsencrypt
