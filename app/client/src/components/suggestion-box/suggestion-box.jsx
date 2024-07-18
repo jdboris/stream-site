@@ -38,6 +38,7 @@ export function SuggestionBox({ useSuggestions, useAuth }) {
             if (!user) {
               throw new Error("Login to do that.");
             }
+
             if (!user.emailVerified) {
               throw new Error("Verify your email to do that.");
             }

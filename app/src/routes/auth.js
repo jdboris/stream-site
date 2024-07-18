@@ -21,7 +21,7 @@ router.post("/api/auth/login", async (req, res) => {
       throw new HttpError("Login failed.", 400);
     }
 
-    res.send({ message: "Login successful!" });
+    res.send(user);
   } catch (error) {
     if (error instanceof InvalidAuthToken) {
       throw new HttpError("Invalid auth token. Please refresh.", 401);
