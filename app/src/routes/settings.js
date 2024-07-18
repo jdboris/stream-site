@@ -47,13 +47,15 @@ router.put("/api/settings", async (req, res) => {
     throw new HttpError("Channel not found.", 404);
   }
 
-  if (user.isAdmin) {
-    await prisma.setting.updateMany({ data: req.body });
-  } else {
-    await prisma.setting.updateMany({ data: new SettingsDto(req.body) });
-  }
+  await prisma.setting.updateMany({
+    data: user.isAdmin ? req.body : new SettingsDto(req.body),
+  });
 
-  res.send({ success: true });
+  const settings = await prisma.setting.findFirst({
+    include: { banner: true, liveChannel: true },
+  });
+
+  res.send(settings ? new SettingsDto(settings) : null);
 });
 
 export default router;
