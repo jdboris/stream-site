@@ -41,6 +41,11 @@ router.get("/api/stream-events/all", async (req, res) => {
         },
       ],
     },
+    include: {
+      streamer: {
+        select: { username: true, nameColor: true, msgBgColor: true },
+      },
+    },
     take: 999,
   });
 
@@ -58,7 +63,9 @@ router.post("/api/stream-events", async (req, res) => {
     throw new HttpError("Permission denied.", 403);
   }
 
-  const { title, start, end } = req.body;
+  const { title } = req.body;
+  const start = new Date(Date.parse(req.body.start.replace(" ", "T") + "Z"));
+  const end = new Date(Date.parse(req.body.end.replace(" ", "T") + "Z"));
 
   await prisma.streamEvent.create({
     data: {
@@ -83,7 +90,9 @@ router.put("/api/stream-events", async (req, res) => {
     throw new HttpError("Permission denied.", 403);
   }
 
-  const { id, title, start, end } = req.body;
+  const { id, title } = req.body;
+  const start = new Date(Date.parse(req.body.start.replace(" ", "T") + "Z"));
+  const end = new Date(Date.parse(req.body.end.replace(" ", "T") + "Z"));
 
   const streamEvent = await prisma.streamEvent.findFirst({ where: { id } });
 
