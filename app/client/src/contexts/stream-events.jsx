@@ -106,6 +106,10 @@ export function StreamEventProvider({ useAuth, children }) {
           end: streamEvent.end.toISOString().slice(0, 19).replace("T", " "),
         }),
         credentials: "include",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const data = await response.json();
 
@@ -137,6 +141,10 @@ export function StreamEventProvider({ useAuth, children }) {
           method: "DELETE",
           body: JSON.stringify(streamEvent),
           credentials: "include",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
         const data = await response.json();
 

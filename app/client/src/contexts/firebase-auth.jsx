@@ -32,6 +32,10 @@ export function FirebaseAuthProvider({ children }) {
         idToken: token,
       }),
       credentials: "include",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   }, []);
 

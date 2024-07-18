@@ -33,6 +33,10 @@ export function SettingsProvider({ children, setErrors }) {
           method: "PUT",
           body: JSON.stringify(updateData),
           credentials: "include",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
 
         const data = await response.json();

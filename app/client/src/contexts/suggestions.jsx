@@ -60,6 +60,10 @@ export function SuggestionsProvider({ children }) {
         method: suggestion.id ? "PUT" : "POST",
         body: JSON.stringify(suggestion),
         credentials: "include",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const data = await response.json();
 
@@ -81,6 +85,10 @@ export function SuggestionsProvider({ children }) {
         method: "DELETE",
         body: JSON.stringify(suggestion),
         credentials: "include",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const data = await response.json();
 

@@ -23,14 +23,20 @@ export async function getUser(authToken) {
       ? await fetch(FIREBASE_EMULATOR_AUTH_URL, {
           method: "POST",
           body: JSON.stringify({ idToken: authToken }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
       : await fetch(FIREBASE_AUTH_URL, {
           method: "POST",
           body: JSON.stringify({ data: { idToken: authToken } }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
 
   if (!response.ok) {
-    console.error(new InvalidAuthToken());
+    console.error(await response.text());
     throw new InvalidAuthToken();
   }
 
@@ -45,9 +51,26 @@ export async function getUser(authToken) {
         }
       : data.result;
 
-  const user =
-    (await prisma.user.findFirst({ where: { uid: userData.uid } })) ||
-    (await prisma.user.create({ data: userData }));
+  const user = await prisma.user.upsert({
+    create: {
+      photoUrl: userData.photoUrl,
+      uid: userData.uid,
+      username: userData.username,
+      lowercaseUsername: userData.username.toLowerCase(),
+      email: userData.email,
+
+      nameColor: "#000000",
+      msgBgColor: "#FFFFFF",
+      emailVerified: false,
+      isStreamer: false,
+
+      isAdmin: false,
+      isModerator: false,
+      isBanned: false,
+    },
+    update: {},
+    where: { uid: userData.uid },
+  });
 
   return user;
 }

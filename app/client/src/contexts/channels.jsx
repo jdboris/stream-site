@@ -111,6 +111,10 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
         method: channel.id ? "PUT" : "POST",
         body: JSON.stringify(channel),
         credentials: "include",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const data = await response.json();
 
@@ -135,6 +139,10 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
         method: "DELETE",
         body: JSON.stringify(channel),
         credentials: "include",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const data = await response.json();
 

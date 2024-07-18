@@ -1,12 +1,12 @@
 TODO
 
-- scrub the following from git history
-  - hard-coded firebase project name
-  - hard-coded site name
-  - hard-coded database name
-  - images
-  - browserconfig.xml
-  - manifest.json
-  - site.webmanifest
+- test everything
+
+TODO (LOW PRIORITY)
+
+- fix express session types (i.e. session.token)
+- fix env var types (don't allow undefined)
+
 - eliminate redundant coppy of firebase functions
   - point emulator service to the firebase files in react-firebase-chat directory
+- migrate to postgres
