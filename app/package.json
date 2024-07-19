@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "./src/index.js",
   "type": "module",
+  "engines": {
+    "node": "22.4.0"
+  },
   "scripts": {
     "dev": "concurrently \"npm run start:watch\" \"cd client && npm run dev\"",
     "start:watch": "nodemon --env-file=.env.dev ./src/index.js ",

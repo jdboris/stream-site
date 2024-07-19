@@ -4,6 +4,6 @@ docker compose pull
 docker compose --progress=plain -p stream-site build && docker compose --progress=plain -p stream-site up --watch
 # docker compose --progress=plain -p stream-site up
 
-# docker system prune --all --force
+docker system prune --all --force
 
 $SHELL
