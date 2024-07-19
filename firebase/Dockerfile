@@ -10,7 +10,7 @@ RUN apt update && apt upgrade -y && apt-get install openjdk-17-jdk -y && npm i -
 COPY package*.json ./
 COPY functions/package*.json ./functions/
 
-RUN npm install
+RUN npm install --unsafe-perm
 
 COPY . .
 

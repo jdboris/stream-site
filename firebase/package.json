@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "preinstall": "cd functions && npm i",
+    "preinstall": "cd functions && npm ci",
     "start": "npm run emulators",
     "emulators": "firebase --debug emulators:start"
   },

@@ -7,7 +7,7 @@
     "dev": "concurrently \"npm run start:watch\" \"cd client && npm run dev\"",
     "start:watch": "nodemon --env-file=.env.dev ./src/index.js ",
     "db:migrate": "npx prisma migrate dev",
-    "preinstall": "cd client && npm i",
+    "preinstall": "cd client && npm ci",
     "build": "npx prisma generate && cd client && npm run build",
     "start": "npx wait-on tcp:stream-site-db-1:5432 && npx prisma migrate deploy && node ./src/index.js",
     "clean": "npx rimraf --glob **/node_modules && npx rimraf --glob **/package-lock.json"
@@ -21,13 +21,13 @@
     "@types/express-session": "^1.18.0",
     "@types/node": "^20.14.10",
     "@types/session": "file:@types/session",
-    "concurrently": "^8.2.2",
-    "prisma": "^5.16.2"
+    "concurrently": "^8.2.2"
   },
   "dependencies": {
     "@prisma/client": "^5.16.2",
     "express": "^5.0.0-beta.3",
     "express-session": "^1.18.0",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "prisma": "^5.16.2"
   }
 }

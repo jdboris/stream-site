@@ -2,6 +2,8 @@ docker compose down
 docker compose pull
 # docker compose --progress=plain -p stream-site build --no-cache && docker compose --progress=plain -p stream-site up --watch
 docker compose --progress=plain -p stream-site build && docker compose --progress=plain -p stream-site up --watch
-docker system prune --all --force
+# docker compose --progress=plain -p stream-site up
+
+# docker system prune --all --force
 
 $SHELL

@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:22.4.0-alpine3.20
 
 ARG NODE_ENV
 ENV NODE_ENV=$NODE_ENV
@@ -14,7 +14,9 @@ COPY package*.json .
 COPY client/package*.json client
 COPY client/react-firebase-chat/package*.json client/react-firebase-chat/
 
-RUN npm install
+RUN npm config set registry https://registry.npmjs.org/
+
+RUN npm ci --unsafe-perm
 
 COPY . .
 
