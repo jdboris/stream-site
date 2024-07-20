@@ -2,9 +2,10 @@
   "scripts": {
     "preinstall": "cd functions && npm i",
     "start": "npm run emulators",
-    "emulators": "firebase --debug emulators:start"
+    "emulators": "firebase --debug emulators:start --import=/data/export --export-on-exit",
+    "export": "firebase --debug emulators:export /data/export"
   },
   "dependencies": {
-    "firebase-tools": "^13.5.2"
+    "firebase-tools": "13.13.3"
   }
 }

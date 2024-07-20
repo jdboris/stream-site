@@ -8,7 +8,7 @@ ENV FIREBASE_APP_PATH=$FIREBASE_APP_PATH
 
 WORKDIR /app
 
-RUN apt update && apt upgrade -y && apt-get install openjdk-17-jdk -y && npm i -g firebase-tools@13.6.0
+RUN apt update && apt upgrade -y && apt-get install openjdk-17-jdk -y
 
 COPY ./firebase/package*.json ./
 COPY ${FIREBASE_APP_PATH}/functions/package*.json ./functions/

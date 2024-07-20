@@ -87,7 +87,7 @@ services:
 
     develop:
       watch:
-        - action: sync
+        - action: sync+restart
           path: ${FIREBASE_APP_PATH}
           target: /app
 
@@ -103,4 +103,5 @@ services:
       - 9299:9299
 
     volumes:
-      - ./volumes/.cache:/root/.cache/firebase/emulators
+      - ./firebase/volumes/.cache:/root/.cache/firebase/emulators
+      - ./firebase/volumes/data:/data
