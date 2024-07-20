@@ -1,7 +1,0 @@
-rules_version = '2';
-service firebase.storage {
-  match /b/{bucket}/o/{uid}/{fileName} {
-    allow read: if false;
-    allow write: if false;
-  }
-}

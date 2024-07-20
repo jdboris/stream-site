@@ -79,10 +79,17 @@ services:
 
   firebase:
     build:
-      dockerfile: ./Dockerfile
-      context: ./firebase
+      dockerfile: ./firebase/Dockerfile
+      context: .
       args:
         FIREBASE_TOKEN: ${FIREBASE_TOKEN}
+        FIREBASE_APP_PATH: ${FIREBASE_APP_PATH}
+
+    develop:
+      watch:
+        - action: sync
+          path: ${FIREBASE_APP_PATH}
+          target: /app
 
     ports:
       - 9099:9099
