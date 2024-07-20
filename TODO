@@ -1,6 +1,5 @@
 TODO
 
-- BUG: Can't focus the chat textarea
 - test everything
 
 TODO (LOW PRIORITY)
@@ -8,6 +7,5 @@ TODO (LOW PRIORITY)
 - fix express session types (i.e. session.token)
 - fix env var types (don't allow undefined)
 
-- eliminate redundant coppy of firebase functions
-  - point emulator service to the firebase files in react-firebase-chat directory
+- fix sass errors on build
 - migrate to postgres

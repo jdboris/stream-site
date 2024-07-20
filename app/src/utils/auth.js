@@ -53,20 +53,20 @@ export async function getUser(authToken) {
 
   const user = await prisma.user.upsert({
     create: {
-      photoUrl: userData.photoUrl,
+      photoUrl: userData.photoUrl || null,
       uid: userData.uid,
       username: userData.username,
       lowercaseUsername: userData.username.toLowerCase(),
       email: userData.email,
 
-      nameColor: "#000000",
-      msgBgColor: "#FFFFFF",
-      emailVerified: false,
-      isStreamer: false,
+      nameColor: userData.nameColor ?? "#000000",
+      msgBgColor: userData.msgBgColor ?? "#FFFFFF",
+      emailVerified: userData.emailVerified ?? false,
+      isStreamer: userData.isStreamer ?? false,
 
-      isAdmin: false,
-      isModerator: false,
-      isBanned: false,
+      isAdmin: userData.isAdmin ?? false,
+      isModerator: userData.isModerator ?? false,
+      isBanned: userData.isBanned ?? false,
     },
     update: {},
     where: { uid: userData.uid },

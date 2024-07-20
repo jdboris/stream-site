@@ -34,7 +34,7 @@ model User {
   username          String        @unique
   lowercaseUsername String        @unique
   email             String
-  photoUrl          String
+  photoUrl          String?
   nameColor         String
   msgBgColor        String
   emailVerified     Boolean
