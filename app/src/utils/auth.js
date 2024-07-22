@@ -62,13 +62,27 @@ export async function getUser(authToken) {
       nameColor: userData.nameColor ?? "#000000",
       msgBgColor: userData.msgBgColor ?? "#FFFFFF",
       emailVerified: userData.emailVerified ?? false,
-      isStreamer: userData.isStreamer ?? false,
+      isStreamer: false,
 
       isAdmin: userData.isAdmin ?? false,
       isModerator: userData.isModerator ?? false,
       isBanned: userData.isBanned ?? false,
     },
-    update: {},
+    update: {
+      photoUrl: userData.photoUrl || null,
+
+      username: userData.username,
+      lowercaseUsername: userData.username.toLowerCase(),
+      email: userData.email,
+
+      nameColor: userData.nameColor ?? "#000000",
+      msgBgColor: userData.msgBgColor ?? "#FFFFFF",
+      emailVerified: userData.emailVerified ?? false,
+
+      isAdmin: userData.isAdmin ?? false,
+      isModerator: userData.isModerator ?? false,
+      isBanned: userData.isBanned ?? false,
+    },
     where: { uid: userData.uid },
   });
 
