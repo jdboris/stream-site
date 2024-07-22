@@ -24,7 +24,7 @@ router.get("/api/suggestions/all", async (req, res) => {
     take: itemsPerPage,
   });
 
-  const pageCount = (await prisma.suggestion.count()) / itemsPerPage;
+  const pageCount = Math.ceil((await prisma.suggestion.count()) / itemsPerPage);
 
   res.send({ suggestions, pageCount });
 });
