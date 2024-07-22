@@ -14,7 +14,13 @@ router.get("/api/channels/all", async (req, res) => {
     throw new HttpError("Channels(s) not found.", 404);
   }
 
-  res.send(channels.map((x) => new ChannelDto(x)));
+  const user = await getCurrentUser(req);
+
+  res.send(
+    channels.map((x) =>
+      user && (user.isStreamer || user.isAdmin) ? x : new ChannelDto(x)
+    )
+  );
 });
 
 router.get("/api/channels/live", async (req, res) => {
