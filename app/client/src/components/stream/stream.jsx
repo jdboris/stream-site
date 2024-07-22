@@ -23,21 +23,23 @@ export function Stream({
     }
   }, [otherErrors]);
 
-  return channel ? (
+  return (
     <div className={className + " " + css.outer}>
       <div className={css.inner}>
-        <iframe
-          title="stream"
-          className={css.stream}
-          src={channel.source}
-          scrolling="no"
-          frameBorder="0"
-          allowtransparency="true"
-          allowFullScreen={true}
-          webkitallowfullscreen="true"
-          mozallowfullscreen="true"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        ></iframe>
+        {channel && (
+          <iframe
+            title="stream"
+            className={css.stream}
+            src={channel.source}
+            scrolling="no"
+            frameBorder="0"
+            allowtransparency="true"
+            allowFullScreen={true}
+            webkitallowfullscreen="true"
+            mozallowfullscreen="true"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          ></iframe>
+        )}
         <Modal
           open={modalMessages.length}
           requestClose={() => {
@@ -61,10 +63,6 @@ export function Stream({
           ))}
         </Modal>
       </div>
-    </div>
-  ) : (
-    <div className={css.outer}>
-      <div className={css.inner}></div>
     </div>
   );
 }

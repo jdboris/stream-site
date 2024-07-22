@@ -57,7 +57,7 @@ export async function getUser(authToken) {
       uid: userData.uid,
       username: userData.username,
       lowercaseUsername: userData.username.toLowerCase(),
-      email: userData.email,
+      email: userData.email ?? null,
 
       nameColor: userData.nameColor ?? "#000000",
       msgBgColor: userData.msgBgColor ?? "#FFFFFF",
@@ -73,7 +73,7 @@ export async function getUser(authToken) {
 
       username: userData.username,
       lowercaseUsername: userData.username.toLowerCase(),
-      email: userData.email,
+      email: userData.email ?? null,
 
       nameColor: userData.nameColor ?? "#000000",
       msgBgColor: userData.msgBgColor ?? "#FFFFFF",

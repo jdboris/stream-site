@@ -59,10 +59,10 @@ router.post("/api/channels", async (req, res) => {
     data: {
       creatorId: user.id,
       service,
-      description,
+      description: description ?? null,
       name,
       source,
-      isSecure,
+      isSecure: isSecure ?? true,
 
       streamUrl,
       key,

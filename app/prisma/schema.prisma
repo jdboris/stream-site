@@ -33,7 +33,7 @@ model User {
   uid               String        @unique
   username          String        @unique
   lowercaseUsername String        @unique
-  email             String
+  email             String?
   photoUrl          String?
   nameColor         String
   msgBgColor        String
@@ -51,7 +51,7 @@ model Channel {
   creatorId   Int
   creator     User      @relation(fields: [creatorId], references: [id])
   service     String
-  description String
+  description String?
   name        String
   source      String
   isSecure    Boolean

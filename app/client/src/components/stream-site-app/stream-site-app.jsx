@@ -35,6 +35,7 @@ function StreamSitePage({
   setCallbackToTrigger,
 }) {
   const [streamModalMessages, setStreamModalMessages] = useState([]);
+  console.log("streamModalMessages: ", streamModalMessages);
   const [maxWidth, setMaxWidth] = useState(
     localStorage.getItem("fitMode") === "1" ? "100%" : null
   );
