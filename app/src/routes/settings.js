@@ -37,7 +37,19 @@ router.put("/api/settings", async (req, res) => {
     throw new HttpError("Permission denied.", 403);
   }
 
-  const { liveChannelId } = req.body;
+  const { liveChannelId, isStreamLocked, announcement, isStatic, bannerId } =
+    req.body;
+
+  if (
+    isStreamLocked !== undefined ||
+    announcement !== undefined ||
+    isStatic !== undefined ||
+    bannerId !== undefined
+  ) {
+    if (!user.isAdmin) {
+      throw new HttpError("Permission denied.", 403);
+    }
+  }
 
   const channel = await prisma.channel.findFirst({
     where: { id: liveChannelId },
@@ -47,15 +59,23 @@ router.put("/api/settings", async (req, res) => {
     throw new HttpError("Channel not found.", 404);
   }
 
-  await prisma.setting.updateMany({
-    data: user.isAdmin ? req.body : new SettingsDto(req.body),
+  await prisma.setting.upsert({
+    create: {
+      liveChannelId,
+      isStreamLocked: isStreamLocked ?? false,
+      announcement: announcement ?? "",
+      isStatic: isStatic ?? false,
+      bannerId: bannerId ?? 1,
+    },
+    update: { liveChannelId, isStreamLocked, announcement, isStatic, bannerId },
+    where: { id: 1 },
   });
 
   const settings = await prisma.setting.findFirst({
     include: { banner: true, liveChannel: true },
   });
 
-  res.send(settings ? new SettingsDto(settings) : null);
+  res.send(settings && new SettingsDto(settings));
 });
 
 export default router;
