@@ -39,7 +39,7 @@ export function ChannelSelector({
     }),
     singleValue: (provided, { data }) => ({
       ...provided,
-      color: data.value === settings.liveChannelId ? "#ff7900" : "#9B4900",
+      color: data.value === settings?.liveChannelId ? "#ff7900" : "#9B4900",
       background: 0,
       textTransform: "uppercase",
       display: "flex",
@@ -71,7 +71,7 @@ export function ChannelSelector({
       return {
         ...provided,
         background: "black",
-        color: data.value === settings.liveChannelId ? "#ff7900" : "#9B4900",
+        color: data.value === settings?.liveChannelId ? "#ff7900" : "#9B4900",
         cursor: "pointer",
         textTransform: "uppercase",
         paddingTop: "5px",
@@ -92,7 +92,7 @@ export function ChannelSelector({
   useEffect(() => {
     (async () => {
       if (settings) {
-        setSelectedChannelId(settings.liveChannelId);
+        setSelectedChannelId(settings?.liveChannelId || null);
       }
     })();
   }, [settings]);
@@ -146,7 +146,7 @@ export function ChannelSelector({
                 channel={channel}
                 useChannels={useChannels}
                 resetToLive={async () => {
-                  setSelectedChannelId(settings.liveChannelId);
+                  setSelectedChannelId(settings?.liveChannelId || null);
                   showInModal(null);
                 }}
               />
