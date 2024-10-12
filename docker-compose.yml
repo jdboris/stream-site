@@ -78,6 +78,7 @@ services:
     volumes:
       - ./certbot/volumes/etc/letsencrypt:/etc/letsencrypt
 
+  # Development only
   firebase:
     build:
       dockerfile: ./firebase/Dockerfile
