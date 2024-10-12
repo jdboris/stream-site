@@ -24,7 +24,7 @@ echo Building and running...
 
 # Build/run from the temporary folder
 ssh -i ./secrets/id_rsa root@$SSH_ADDRESS '
-  cd /stream-site/ && docker compose pull && docker compose up -p stream-site -f docker-compose.yml -f docker-compose-prod.yml --build --force-recreate --renew-anon-volumes --detach
+  cd /stream-site/ && docker compose pull && docker-compose up -p stream-site -f docker-compose.yml -f docker-compose-prod.yml --build --force-recreate --renew-anon-volumes --detach
 '
 
 ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'docker system prune --all'
