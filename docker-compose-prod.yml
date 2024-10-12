@@ -1,7 +1,8 @@
 services:
   app:
     command: ""
-    watch:
+    develop:
+      watch:
 
   firebase: {}
 
