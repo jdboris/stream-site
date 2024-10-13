@@ -14,8 +14,6 @@ RUN mkdir -p /var/www/html/.well-known/
 COPY /config/cli.ini /certbot-config/letsencrypt/cli.ini
 RUN echo "email = $CERTBOT_EMAIL" >> /certbot-config/letsencrypt/cli.ini
 
-RUN cat /certbot-config/letsencrypt/cli.ini
-
 # ACME challenge files
 VOLUME [ "/var/www/html/.well-known/" ]
 # Certbot config files
