@@ -1,6 +1,5 @@
 {
   "scripts": {
-    "preinstall": "cd functions && npm i",
     "start": "npm run emulators",
     "emulators": "firebase --debug emulators:start --import=/data/export --export-on-exit",
     "export": "firebase --debug emulators:export /data/export"
