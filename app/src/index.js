@@ -1,4 +1,5 @@
-import { createServer } from "https";
+import { createServer as createServerHttps } from "https";
+import { createServer as createServerHttp } from "http";
 import express from "express";
 import session from "express-session";
 import { fileURLToPath } from "url";
@@ -88,15 +89,15 @@ const certificate = readFileSync(
   "utf8"
 );
 
-createServer(
+createServerHttps(
   {
     key: privateKey,
     cert: certificate,
   },
   app
-).listen(PORT);
-
-console.log(`App listening on port ${PORT}`);
+).listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+});
 
 // Certbot ACME challenge...
 
@@ -111,6 +112,6 @@ httpApp.use((req, res) => {
   res.redirect(`https://${PUBLIC_DOMAIN}${req.url}`);
 });
 
-createServer(httpApp).listen(80, () => {
-  console.log(`App listening on port 80`);
+createServerHttp(httpApp).listen(80, () => {
+  console.log(`Example app listening on port 80`);
 });
