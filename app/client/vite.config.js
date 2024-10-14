@@ -69,7 +69,7 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         "/api": {
-          target: "https://localhost:443",
+          target: "https://localhost:3000",
           changeOrigin: true,
           secure: false,
           ws: true,
