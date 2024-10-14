@@ -17,10 +17,18 @@ services:
       - "80:${APP_PORT}"
       - "443:${APP_PORT}"
 
+    # Allow certbot to wait on this container to be serving files
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
     volumes:
       - ./app/prisma:/app/prisma
       - ./certbot/volumes/etc/letsencrypt:/certbot/volumes/etc/letsencrypt
       - ./certbot/volumes/var/www/html/.well-known:/app/client/public/.well-known
+
   db:
     profiles:
       - production
@@ -72,6 +80,12 @@ services:
         CERTBOT_EMAIL: ${CERTBOT_EMAIL}
         PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
     command: certonly -v -d "${PUBLIC_DOMAIN}" -d "www.${PUBLIC_DOMAIN}"
+
+    # Wait on app to be serving files before starting, so the ACME challenge can work
+    depends_on:
+      app:
+        condition: service_healthy
+
     volumes:
       - ./certbot/volumes/var/lib/letsencrypt/:/var/lib/letsencrypt/
       - ./certbot/volumes/etc/letsencrypt/:/etc/letsencrypt/
