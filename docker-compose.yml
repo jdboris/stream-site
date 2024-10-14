@@ -20,7 +20,7 @@ services:
     volumes:
       - ./app/prisma:/app/prisma
       - ./certbot/volumes/etc/letsencrypt:/certbot/volumes/etc/letsencrypt
-      - ./certbot/volumes/var/www/html/.well-known:/var/www/html/.well-known
+      - ./certbot/volumes/var/www/html/.well-known:/app/client/public/.well-known
   db:
     profiles:
       - production
