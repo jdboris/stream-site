@@ -97,3 +97,20 @@ createServer(
 ).listen(PORT);
 
 console.log(`App listening on port ${PORT}`);
+
+// Certbot ACME challenge...
+
+const httpApp = express();
+
+httpApp.use(
+  "/.well-known",
+  express.static(path.join(__dirname, "../client/public/.well-known"))
+);
+
+httpApp.use((req, res) => {
+  res.redirect(`https://${PUBLIC_DOMAIN}${req.url}`);
+});
+
+createServer(httpApp).listen(80, () => {
+  console.log(`App listening on port 80`);
+});

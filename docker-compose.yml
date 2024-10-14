@@ -14,7 +14,7 @@ services:
 
     ports:
       # NOTE: 80 is required for certbot ACME challenge
-      - "80:${APP_PORT}"
+      - "80:80"
       - "443:${APP_PORT}"
 
     # Allow certbot to wait on this container to be serving files

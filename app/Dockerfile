@@ -6,7 +6,8 @@ ARG NODE_ENV
 ENV NODE_ENV=$NODE_ENV
 ARG PUBLIC_DOMAIN
 ENV PUBLIC_DOMAIN=$PUBLIC_DOMAIN
-ENV PORT=443
+ARG PORT
+ENV PORT=$PORT
 
 WORKDIR /app
 
@@ -26,7 +27,7 @@ COPY . .
 RUN cd client && npm install react-firebase-chat
 
 # NOTE: 80 is required for certbot ACME challenge
-EXPOSE 80 443
+EXPOSE 80 $PORT
 
 # DEV STAGE
 FROM ${BASE_IMAGE} AS dev-stage
