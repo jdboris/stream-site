@@ -20,6 +20,8 @@ ssh -i ./secrets/id_rsa root@$SSH_ADDRESS "rm -rf /stream-site/ && mkdir -p /str
 # Copy/upload untracked files
 scp -i ./secrets/id_rsa -r ./.env.production root@$SSH_ADDRESS:/stream-site/.env
 
+scp -i ./secrets/id_rsa -r ./app/.env root@$SSH_ADDRESS:/stream-site/app/.env
+
 scp -i ./secrets/id_rsa -r ./app/client/react-firebase-chat/firebase/.firebaserc root@$SSH_ADDRESS:/stream-site/app/client/react-firebase-chat/firebase/
 scp -i ./secrets/id_rsa -r ./app/client/react-firebase-chat/firebase/functions/.runtimeconfig.json root@$SSH_ADDRESS:/stream-site/app/client/react-firebase-chat/firebase/functions/
 
