@@ -1,4 +1,6 @@
-FROM node:22.4.0-alpine3.20
+ARG BASE_IMAGE=node:22.4.0-alpine3.20
+
+FROM ${BASE_IMAGE} AS base-stage
 
 ARG NODE_ENV
 ENV NODE_ENV=$NODE_ENV
@@ -23,9 +25,25 @@ COPY . .
 # NOTE: Repeat install as workaround for symlink package bug
 RUN cd client && npm install react-firebase-chat
 
+# NOTE: 80 is required for certbot ACME challenge
+EXPOSE 80 443
+
+# DEV STAGE
+FROM ${BASE_IMAGE} AS dev-stage
+
+WORKDIR /app
+
+COPY --from=base-stage /app .
+
+CMD ["npm", "run", "dev"]
+
+# PROD STAGE
+FROM ${BASE_IMAGE} AS prod-stage
+
+WORKDIR /app
+
+COPY --from=base-stage /app .
+
 RUN npm run build
 
 CMD ["npm", "run", "start"]
-
-# NOTE: 80 is required for certbot ACME challenge
-EXPOSE 80 443

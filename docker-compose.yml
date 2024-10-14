@@ -1,5 +1,9 @@
 services:
   app:
+    profiles:
+      - production
+      - development
+
     restart: always
     build:
       dockerfile: ./Dockerfile
@@ -8,45 +12,20 @@ services:
         NODE_ENV: ${ENVIRONMENT}
         PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
 
-    develop:
-      watch:
-        - action: sync
-          path: ./app/src
-          target: /app/src
-
-        - action: sync
-          path: ./app/client/src
-          target: /app/client/src
-
-        - action: sync
-          path: ./app/client/react-firebase-chat/src
-          target: /app/client/react-firebase-chat/src
-
-        - action: rebuild
-          path: ./app/package.json
-          target: /app
-
-        - action: rebuild
-          path: ./app/client/package.json
-          target: /app/client
-
-        - action: rebuild
-          path: ./app/client/react-firebase-chat/package.json
-          target: /app/client/react-firebase-chat
-
     ports:
       # NOTE: 80 is required for certbot ACME challenge
       - "80:${APP_PORT}"
       - "443:${APP_PORT}"
-
-    # NOTE: Overriden in prod
-    command: ["npm", "run", "dev"]
 
     volumes:
       - ./app/prisma:/app/prisma
       - ./certbot/volumes/etc/letsencrypt:/certbot/volumes/etc/letsencrypt
       - ./certbot/volumes/var/www/html/.well-known:/var/www/html/.well-known
   db:
+    profiles:
+      - production
+      - development
+
     restart: always
     build:
       dockerfile: ./Dockerfile
@@ -63,6 +42,10 @@ services:
       - ./db/volumes/data:/var/lib/mysql
 
   phpmyadmin:
+    profiles:
+      - production
+      - development
+
     restart: always
     build:
       dockerfile: ./Dockerfile
@@ -78,32 +61,18 @@ services:
     volumes:
       - ./certbot/volumes/etc/letsencrypt:/etc/letsencrypt
 
-  # Development only
-  firebase:
+  certbot:
+    profiles:
+      - production
+
     build:
-      dockerfile: ./firebase/Dockerfile
-      context: .
+      dockerfile: ./Dockerfile
+      context: ./certbot
       args:
-        FIREBASE_TOKEN: ${FIREBASE_TOKEN}
-        FIREBASE_APP_PATH: ${FIREBASE_APP_PATH}
-
-    develop:
-      watch:
-        - action: sync+restart
-          path: ${FIREBASE_APP_PATH}
-          target: /app
-
-    ports:
-      - 9099:9099
-      - 5000:5000
-      - 8080:8080
-      - 9000:9000
-      - 9199:9199
-      - 4000:4000
-      - 4500:4500
-      - 9150:9150
-      - 9299:9299
-
+        CERTBOT_EMAIL: ${CERTBOT_EMAIL}
+        PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
+    command: certonly -v -d "${PUBLIC_DOMAIN}" -d "www.${PUBLIC_DOMAIN}"
     volumes:
-      - ./firebase/volumes/.cache:/root/.cache/firebase/emulators
-      - ./firebase/volumes/data:/data
+      - ./certbot/volumes/var/lib/letsencrypt/:/var/lib/letsencrypt/
+      - ./certbot/volumes/etc/letsencrypt/:/etc/letsencrypt/
+      - ./certbot/volumes/var/www/html/.well-known/:/var/www/html/.well-known/
