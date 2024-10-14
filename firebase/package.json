@@ -5,6 +5,6 @@
     "export": "firebase --debug emulators:export /data/export"
   },
   "dependencies": {
-    "firebase-tools": "13.13.3"
+    "firebase-tools": "^13.13.3"
   }
 }
