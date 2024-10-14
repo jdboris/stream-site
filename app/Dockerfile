@@ -44,6 +44,12 @@ WORKDIR /app
 
 COPY --from=base-stage /app .
 
+# Install dev dependencies to ensure Vite is available for the build
+RUN npm install
+
 RUN npm run build
+
+# Remove dev dependencies to optimize the image for production
+RUN npm prune --production
 
 CMD ["npm", "run", "start"]
