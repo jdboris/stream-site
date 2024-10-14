@@ -23,6 +23,8 @@ scp -i ./secrets/id_rsa -r ./.env.production root@$SSH_ADDRESS:/stream-site/.env
 scp -i ./secrets/id_rsa -r ./app/client/react-firebase-chat/firebase/.firebaserc root@$SSH_ADDRESS:/stream-site/app/client/react-firebase-chat/firebase/
 scp -i ./secrets/id_rsa -r ./app/client/react-firebase-chat/firebase/functions/.runtimeconfig.json root@$SSH_ADDRESS:/stream-site/app/client/react-firebase-chat/firebase/functions/
 
+scp -i ./secrets/id_rsa -r ./app/secrets/session-key.key root@$SSH_ADDRESS:/stream-site/app/secrets/
+
 scp -i ./secrets/id_rsa -r ./app/client/assets/ root@$SSH_ADDRESS:/stream-site/app/client/
 
 echo Building and running...
