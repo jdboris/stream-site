@@ -104,7 +104,7 @@ const httpApp = express();
 
 httpApp.use(
   "/.well-known",
-  express.static(path.join(__dirname, "../client/public/.well-known"))
+  express.static(path.join(__dirname, "../client/.well-known"))
 );
 
 httpApp.use((req, res) => {
