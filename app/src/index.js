@@ -16,7 +16,7 @@ import streamEventsRouter from "./routes/stream-events.js";
 import suggestionsRouter from "./routes/suggestions.js";
 
 import requestLogger from "./utils/request-logger.js";
-import { readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
 import HttpError from "./utils/http-error.js";
 
 const { PORT, PUBLIC_DOMAIN } = process.env;
@@ -31,6 +31,7 @@ if (process.env.NODE_ENV != "production") {
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use(express.json());
+
 app.use(
   session({
     secret: await readFileSync(
@@ -74,30 +75,42 @@ app.use(
   }
 );
 
-const privateKey = readFileSync(
-  path.resolve(
-    __dirname,
-    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`
-  ),
-  "utf8"
-);
-const certificate = readFileSync(
-  path.resolve(
-    __dirname,
-    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`
-  ),
-  "utf8"
+const keyPath = path.resolve(
+  __dirname,
+  `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`
 );
 
-createServerHttps(
-  {
-    key: privateKey,
-    cert: certificate,
-  },
-  app
-).listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-});
+const certPath = path.resolve(
+  __dirname,
+  `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`
+);
+
+const interval = setInterval(async () => {
+  if (startServer()) {
+    clearInterval(interval);
+  }
+}, 5000);
+
+function startServer() {
+  if (!existsSync(keyPath) || !existsSync(certPath)) {
+    return false;
+  }
+
+  const privateKey = readFileSync(keyPath, "utf8");
+  const certificate = readFileSync(certPath, "utf8");
+
+  createServerHttps(
+    {
+      key: privateKey,
+      cert: certificate,
+    },
+    app
+  ).listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+  });
+
+  return true;
+}
 
 // Certbot ACME challenge...
 
