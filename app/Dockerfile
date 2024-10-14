@@ -19,7 +19,7 @@ COPY client/react-firebase-chat/package*.json client/react-firebase-chat/
 
 RUN npm config set registry https://registry.npmjs.org/
 
-RUN npm ci --unsafe-perm
+RUN npm ci --include=dev --unsafe-perm
 
 COPY . .
 
@@ -45,8 +45,8 @@ WORKDIR /app
 
 COPY --from=base-stage /app .
 
-# Install dev dependencies to ensure Vite is available for the build
-RUN npm install
+# # Install dev dependencies to ensure Vite is available for the build
+# RUN npm install
 
 RUN npm run build
 
