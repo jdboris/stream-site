@@ -19,7 +19,7 @@ services:
 
     # Allow certbot to wait on this container to be serving files
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test: ["CMD", "curl", "-f", "http://localhost/.well-known"]
       interval: 5s
       timeout: 5s
       retries: 30
