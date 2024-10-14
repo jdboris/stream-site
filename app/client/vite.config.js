@@ -3,6 +3,12 @@ import react from "@vitejs/plugin-react-swc";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { VitePWA } from "vite-plugin-pwa";
 
+import { fileURLToPath } from "url";
+import path from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
@@ -10,6 +16,14 @@ export default defineConfig(({ mode }) => {
   return {
     build: {
       manifest: true,
+    },
+    resolve: {
+      alias: {
+        "react-firebase-chat": path.resolve(
+          __dirname,
+          "./react-firebase-chat/src"
+        ),
+      },
     },
     plugins: [
       react(),
