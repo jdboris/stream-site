@@ -135,12 +135,12 @@ function startHttpsAcmeChallengeServer() {
   // Use self-signed cert for now
   const keyPath = path.resolve(
     __dirname,
-    `../../certbot/volumes/etc/letsencrypt/live/localhost/privkey.pem`
+    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`
   );
 
   const certPath = path.resolve(
     __dirname,
-    `../../certbot/volumes/etc/letsencrypt/live/localhost/fullchain.pem`
+    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`
   );
 
   const app = express();
