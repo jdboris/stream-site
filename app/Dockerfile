@@ -26,11 +26,8 @@ COPY . .
 # NOTE: Repeat install as workaround for symlink package bug
 RUN cd client && npm install react-firebase-chat
 
-# Install OpenSSL and any other dependencies
-RUN apt-get update && apt-get install -y \
-  openssl \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+# Install OpenSSL
+RUN apk add --no-cache openssl
 
 RUN chmod +x ./scripts/generate-ssl-cert.sh
 RUN ./scripts/generate-ssl-cert.sh $PUBLIC_DOMAIN
