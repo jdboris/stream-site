@@ -24,40 +24,45 @@ import HttpError from "./utils/http-error.js";
 
 const { NODE_ENV, PORT, PUBLIC_DOMAIN } = process.env;
 
-/** @type {HttpsServer|null} */
-let server = null;
-/** @type {HttpServer|null} */
-let httpAcmeChallengeServer = null;
-/** @type {HttpsServer|null} */
-let httpsAcmeChallengeServer = null;
+// Use self-signed cert for now
+const keyPath = path.resolve(__dirname, `../ssl/privkey.pem`);
+const certPath = path.resolve(__dirname, `../ssl/fullchain.pem`);
+startServer(keyPath, certPath);
 
-// Periodically check for cert files and start acme challenge servers if they're missing.
-const interval = setInterval(async () => {
-  const keyPath = path.resolve(
-    __dirname,
-    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`
-  );
+// /** @type {HttpsServer|null} */
+// let server = null;
+// /** @type {HttpServer|null} */
+// let httpAcmeChallengeServer = null;
+// /** @type {HttpsServer|null} */
+// let httpsAcmeChallengeServer = null;
 
-  const certPath = path.resolve(
-    __dirname,
-    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`
-  );
+// // Periodically check for cert files and start acme challenge servers if they're missing.
+// const interval = setInterval(async () => {
+//   const keyPath = path.resolve(
+//     __dirname,
+//     `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`
+//   );
 
-  if (existsSync(keyPath) && existsSync(certPath)) {
-    clearInterval(interval);
+//   const certPath = path.resolve(
+//     __dirname,
+//     `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`
+//   );
 
-    if (httpAcmeChallengeServer) httpAcmeChallengeServer.close();
-    if (httpsAcmeChallengeServer) httpsAcmeChallengeServer.close();
-    server = server || startServer(keyPath, certPath);
-    return;
-  }
+//   if (existsSync(keyPath) && existsSync(certPath)) {
+//     clearInterval(interval);
 
-  if (server) server.close();
-  httpsAcmeChallengeServer =
-    httpsAcmeChallengeServer || startHttpsAcmeChallengeServer();
-  httpAcmeChallengeServer =
-    httpAcmeChallengeServer || startHttpAcmeChallengeServer();
-}, 5000);
+//     if (httpAcmeChallengeServer) httpAcmeChallengeServer.close();
+//     if (httpsAcmeChallengeServer) httpsAcmeChallengeServer.close();
+//     server = server || startServer(keyPath, certPath);
+//     return;
+//   }
+
+//   if (server) server.close();
+//   httpsAcmeChallengeServer =
+//     httpsAcmeChallengeServer || startHttpsAcmeChallengeServer();
+//   httpAcmeChallengeServer =
+//     httpAcmeChallengeServer || startHttpAcmeChallengeServer();
+// }, 5000);
 
 /**
  * @param {string} certPath
