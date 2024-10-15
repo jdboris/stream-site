@@ -1,7 +1,10 @@
 source .env
 
 echo "Uninstalling apache, if any..."
-ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'sudo apt remove apache2* -y'
+ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'sudo service httpd stop && sudo apt remove --purge apache2* -y'
+
+echo "Uninstalling mariadb, if any..."
+ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'sudo service mariadb stop && sudo apt remove --purge mariadb-server mariadb-client -y'
 
 echo "Installing git on remote..."
 ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'sudo apt-get update && sudo apt-get install git-all -y'

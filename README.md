@@ -68,5 +68,5 @@ ssh -i ./secrets/id_rsa root@$SSH_ADDRESS 'docker logs --since=1h -f stream-site
 # Connect to Container Shell
 
 ```
-ssh -t -i ./secrets/id_rsa root@$SSH_ADDRESS 'docker exec -it stream-site-app-1 bash'
+ssh -t -i ./secrets/id_rsa root@$SSH_ADDRESS 'docker exec -it stream-site-app-1 sh'
 ```
