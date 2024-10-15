@@ -22,6 +22,8 @@ scp -i ./secrets/id_rsa -r ./.env.production root@$SSH_ADDRESS:/stream-site/.env
 
 scp -i ./secrets/id_rsa -r ./app/.env root@$SSH_ADDRESS:/stream-site/app/.env
 
+scp -i ./secrets/id_rsa -r ./app/client/.env root@$SSH_ADDRESS:/stream-site/app/client/.env
+
 scp -i ./secrets/id_rsa -r ./app/client/react-firebase-chat/firebase/.firebaserc root@$SSH_ADDRESS:/stream-site/app/client/react-firebase-chat/firebase/
 scp -i ./secrets/id_rsa -r ./app/client/react-firebase-chat/firebase/functions/.runtimeconfig.json root@$SSH_ADDRESS:/stream-site/app/client/react-firebase-chat/firebase/functions/
 
