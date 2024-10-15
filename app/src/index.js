@@ -48,13 +48,15 @@ const interval = setInterval(async () => {
 
     if (httpAcmeChallengeServer) httpAcmeChallengeServer.close();
     if (httpsAcmeChallengeServer) httpsAcmeChallengeServer.close();
-    server = startServer(keyPath, certPath);
+    server = server || startServer(keyPath, certPath);
     return;
   }
 
   if (server) server.close();
-  httpAcmeChallengeServer = startHttpAcmeChallengeServer();
-  httpsAcmeChallengeServer = startHttpsAcmeChallengeServer();
+  httpAcmeChallengeServer =
+    httpAcmeChallengeServer || startHttpAcmeChallengeServer();
+  httpsAcmeChallengeServer =
+    httpsAcmeChallengeServer || startHttpsAcmeChallengeServer();
 }, 5000);
 
 /**
