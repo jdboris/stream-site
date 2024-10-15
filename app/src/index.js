@@ -28,6 +28,12 @@ if (process.env.NODE_ENV != "production") {
   app.use(requestLogger);
 }
 
+// Certbot ACME challenge (https option for use with proxies like Cloudflare)...
+app.use(
+  "/.well-known",
+  express.static(path.join(__dirname, "../client/.well-known"))
+);
+
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use(express.json());
