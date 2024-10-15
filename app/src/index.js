@@ -135,15 +135,9 @@ function startServer(keyPath, certPath) {
 // HTTPS (in case of proxies like cloudflare)
 function startHttpsAcmeChallengeServer() {
   // Use self-signed cert for now
-  const keyPath = path.resolve(
-    __dirname,
-    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`
-  );
+  const keyPath = path.resolve(__dirname, `../ssl/privkey.pem`);
 
-  const certPath = path.resolve(
-    __dirname,
-    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`
-  );
+  const certPath = path.resolve(__dirname, `../ssl/fullchain.pem`);
 
   const app = express();
 
