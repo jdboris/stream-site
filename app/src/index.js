@@ -64,6 +64,8 @@ const interval = setInterval(async () => {
  * @param {string} keyPath
  * */
 function startServer(keyPath, certPath) {
+  console.log("Starting main app server...");
+
   const app = express();
 
   if (NODE_ENV != "production") {
@@ -134,6 +136,8 @@ function startServer(keyPath, certPath) {
 
 // HTTPS (in case of proxies like cloudflare)
 function startHttpsAcmeChallengeServer() {
+  console.log("Starting HTTPS ACME challenge server...");
+
   // Use self-signed cert for now
   const keyPath = path.resolve(__dirname, `../ssl/privkey.pem`);
 
@@ -162,6 +166,8 @@ function startHttpsAcmeChallengeServer() {
 
 // HTTP
 function startHttpAcmeChallengeServer() {
+  console.log("Starting HTTP ACME challenge server...");
+
   const app = express();
 
   app.get("/healthcheck", (req, res) => {
@@ -175,6 +181,6 @@ function startHttpAcmeChallengeServer() {
   );
 
   return createServerHttp(app).listen(80, () => {
-    console.log(`Example app listening on port 80`);
+    console.log(`App listening on port 80`);
   });
 }
