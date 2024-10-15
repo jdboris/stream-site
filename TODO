@@ -1,5 +1,6 @@
 TODO
 
+- stop restarting entire emulator container when changing app src
 - test everything
 - cron job to run certbot renewal
 
