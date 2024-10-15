@@ -19,8 +19,7 @@ services:
 
     # Allow certbot to wait on this container to be serving files
     healthcheck:
-      test:
-        ["CMD", "wget", "--spider", "http://localhost/.well-known/index.html"]
+      test: ["CMD", "wget", "--spider", "http://localhost/healthcheck"]
       interval: 5s
       timeout: 5s
       retries: 30
@@ -28,7 +27,7 @@ services:
     volumes:
       - ./app/prisma:/app/prisma
       - ./certbot/volumes/etc/letsencrypt:/certbot/volumes/etc/letsencrypt
-      - ./certbot/volumes/var/www/html/.well-known:/app/client/public/.well-known
+      - ./certbot/volumes/var/www/html/.well-known:/app/client/.well-known
 
   db:
     profiles:

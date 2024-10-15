@@ -112,10 +112,13 @@ function startServer() {
   return true;
 }
 
-// Certbot ACME challenge...
-
 const httpApp = express();
 
+httpApp.get("/healthcheck", (req, res) => {
+  res.send();
+});
+
+// Certbot ACME challenge...
 httpApp.use(
   "/.well-known",
   express.static(path.join(__dirname, "../client/.well-known"))
