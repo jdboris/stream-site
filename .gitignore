@@ -32,5 +32,10 @@ dist-ssr
 # Docker volumes
 volumes/
 
+# Commit the self-signed certs
+!certbot/volumes/
+certbot/volumes/etc/letsencrypt/*
+!certbot/volumes/etc/letsencrypt/live
+
 # Secrets
 secrets/
