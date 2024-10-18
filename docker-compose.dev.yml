@@ -48,7 +48,7 @@ services:
     develop:
       watch:
         - action: sync+restart
-          path: ${FIREBASE_APP_PATH}
+          path: ${FIREBASE_APP_PATH}/firebase
           target: /app
 
     ports:
