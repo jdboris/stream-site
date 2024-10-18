@@ -1,13 +1,13 @@
 TODO
 
-- invalid urls crash chat
-  - https colon slash slash i.imgur dot \com/OvQWsBf.png
 - stop restarting entire emulator container when changing app src
 - refreshing after a while causes an error message and no banner appears
 - test everything
 
 TODO (LOW PRIORITY)
 
+- use an external store for session data
+  - Source: https://stackoverflow.com/questions/44882535/warning-connect-session-memorystore-is-not-designed-for-a-production-environm
 - debug permission denied error in console on sending messages in local environment
 - add delete channel route
 - investigate error on signup
