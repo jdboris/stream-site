@@ -9,8 +9,6 @@ ENV PUBLIC_DOMAIN=$PUBLIC_DOMAIN
 ARG PORT
 ENV PORT=$PORT
 
-RUN echo $NODE_ENV
-
 WORKDIR /app
 
 RUN mkdir -p client/react-firebase-chat
@@ -48,10 +46,7 @@ CMD ["npm", "run", "dev"]
 # PROD STAGE
 FROM base-stage AS prod-stage
 
-RUN echo $NODE_ENV
 ENV NODE_ENV="production"
-
-RUN echo $NODE_ENV
 
 # # Reinstall dependencies to fix broken symlinks
 # RUN npm install
