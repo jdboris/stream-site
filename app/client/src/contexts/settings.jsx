@@ -31,7 +31,7 @@ export function SettingsProvider({ children, setErrors }) {
         }));
 
         // NOTE: Must refresh firebase ID token before requests that require authentication
-        getIdToken(getAuth().currentUser);
+        getAuth().currentUser && (await getIdToken(getAuth().currentUser));
 
         const response = await fetch("/api/settings", {
           method: "PUT",
@@ -67,7 +67,7 @@ export function SettingsProvider({ children, setErrors }) {
       setLoading(true);
 
       // NOTE: Must refresh firebase ID token before requests that require authentication
-      getIdToken(getAuth().currentUser);
+      getAuth().currentUser && (await getIdToken(getAuth().currentUser));
 
       const response = await fetch("/api/settings", {
         method: "GET",

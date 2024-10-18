@@ -24,7 +24,7 @@ export function FirebaseAuthProvider({ children }) {
   );
 
   const login = useCallback(async (authUser) => {
-    const token = await getIdToken(authUser, true);
+    const token = authUser && (await getIdToken(authUser, true));
 
     return await fetch("/api/auth/login", {
       method: "POST",

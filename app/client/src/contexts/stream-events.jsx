@@ -100,7 +100,7 @@ export function StreamEventProvider({ useAuth, children }) {
       delete streamEvent.streamer;
 
       // NOTE: Must refresh firebase ID token before requests that require authentication
-      getIdToken(getAuth().currentUser);
+      getAuth().currentUser && (await getIdToken(getAuth().currentUser));
 
       const response = await fetch("/api/stream-events", {
         method: streamEvent.id ? "PUT" : "POST",
@@ -142,7 +142,7 @@ export function StreamEventProvider({ useAuth, children }) {
 
       try {
         // NOTE: Must refresh firebase ID token before requests that require authentication
-        getIdToken(getAuth().currentUser);
+        getAuth().currentUser && (await getIdToken(getAuth().currentUser));
 
         const response = await fetch("/api/stream-events", {
           method: "DELETE",

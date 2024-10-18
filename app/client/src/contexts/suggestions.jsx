@@ -59,7 +59,7 @@ export function SuggestionsProvider({ children }) {
       setLoading(true);
 
       // NOTE: Must refresh firebase ID token before requests that require authentication
-      getIdToken(getAuth().currentUser);
+      getAuth().currentUser && (await getIdToken(getAuth().currentUser));
 
       const response = await fetch("/api/suggestions", {
         method: suggestion.id ? "PUT" : "POST",
@@ -87,7 +87,7 @@ export function SuggestionsProvider({ children }) {
 
     try {
       // NOTE: Must refresh firebase ID token before requests that require authentication
-      getIdToken(getAuth().currentUser);
+      getAuth().currentUser && (await getIdToken(getAuth().currentUser));
 
       const response = await fetch("/api/suggestions", {
         method: "DELETE",

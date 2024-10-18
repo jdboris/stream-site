@@ -49,7 +49,7 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
     setLoading(true);
     try {
       // NOTE: Must refresh firebase ID token before requests that require authentication
-      getIdToken(getAuth().currentUser);
+      getAuth().currentUser && (await getIdToken(getAuth().currentUser));
 
       const response = await fetch("/api/channels/all", {
         method: "GET",
@@ -112,7 +112,7 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
     try {
       setLoading(true);
       // NOTE: Must refresh firebase ID token before requests that require authentication
-      getIdToken(getAuth().currentUser);
+      getAuth().currentUser && (await getIdToken(getAuth().currentUser));
 
       const response = await fetch("/api/channels", {
         method: channel.id ? "PUT" : "POST",
@@ -144,7 +144,7 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
       setLoading(true);
 
       // NOTE: Must refresh firebase ID token before requests that require authentication
-      getIdToken(getAuth().currentUser);
+      getAuth().currentUser && (await getIdToken(getAuth().currentUser));
 
       const response = await fetch("/api/channels", {
         method: "DELETE",
