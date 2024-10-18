@@ -12,7 +12,7 @@
     "prisma:generate:watch": "nodemon --watch prisma/schema.prisma --exec npm run prisma:generate",
     "start:watch": "nodemon --env-file=.env.dev ./src/index.js",
     "db:migrate": "npx prisma migrate dev",
-    "preinstall": "cd client && npm ci --include-dev",
+    "preinstall": "cd client && npm ci",
     "build": "npm run prisma:generate && cd client && npm run build",
     "start": "npx wait-on tcp:stream-site-db-1:3306 && npx prisma migrate deploy && node ./src/index.js",
     "clean": "npx rimraf --glob **/node_modules && npx rimraf --glob **/package-lock.json"
