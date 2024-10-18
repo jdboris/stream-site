@@ -102,6 +102,11 @@ function startServer(keyPath, certPath) {
   app.use(streamEventsRouter);
   app.use(suggestionsRouter);
 
+  app.get(
+    "/",
+    express.static(path.join(__dirname, "../client/dist/index.html"))
+  );
+
   app.use(
     /**
      * @param {Error} error
