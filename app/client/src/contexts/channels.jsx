@@ -1,3 +1,4 @@
+import { getAuth, getIdToken } from "firebase/auth";
 import {
   createContext,
   useCallback,
@@ -47,6 +48,9 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
   const readAll = useCallback(async () => {
     setLoading(true);
     try {
+      // NOTE: Must refresh firebase ID token before requests that require authentication
+      getIdToken(getAuth().currentUser);
+
       const response = await fetch("/api/channels/all", {
         method: "GET",
         credentials: "include",
@@ -107,6 +111,9 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
   const saveChannel = useCallback(async (channel) => {
     try {
       setLoading(true);
+      // NOTE: Must refresh firebase ID token before requests that require authentication
+      getIdToken(getAuth().currentUser);
+
       const response = await fetch("/api/channels", {
         method: channel.id ? "PUT" : "POST",
         body: JSON.stringify(channel),
@@ -135,6 +142,10 @@ export function ChannelProvider({ useAuth, setErrors, children }) {
   const deleteChannel = useCallback(async (channel) => {
     try {
       setLoading(true);
+
+      // NOTE: Must refresh firebase ID token before requests that require authentication
+      getIdToken(getAuth().currentUser);
+
       const response = await fetch("/api/channels", {
         method: "DELETE",
         body: JSON.stringify(channel),

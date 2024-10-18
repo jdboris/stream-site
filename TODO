@@ -6,6 +6,7 @@ TODO
 
 TODO (LOW PRIORITY)
 
+- add delete channel route
 - investigate error on signup
 - fix express session types (i.e. session.token)
 - fix env var types (don't allow undefined)

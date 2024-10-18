@@ -1,3 +1,4 @@
+import { getAuth, getIdToken } from "firebase/auth";
 import { createContext, useCallback, useContext, useState } from "react";
 const SuggestionsContext = createContext(null);
 
@@ -56,6 +57,10 @@ export function SuggestionsProvider({ children }) {
   async function saveSuggestion(suggestion) {
     try {
       setLoading(true);
+
+      // NOTE: Must refresh firebase ID token before requests that require authentication
+      getIdToken(getAuth().currentUser);
+
       const response = await fetch("/api/suggestions", {
         method: suggestion.id ? "PUT" : "POST",
         body: JSON.stringify(suggestion),
@@ -81,6 +86,9 @@ export function SuggestionsProvider({ children }) {
     setLoading(true);
 
     try {
+      // NOTE: Must refresh firebase ID token before requests that require authentication
+      getIdToken(getAuth().currentUser);
+
       const response = await fetch("/api/suggestions", {
         method: "DELETE",
         body: JSON.stringify(suggestion),

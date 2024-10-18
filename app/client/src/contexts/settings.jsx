@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { tryOperation } from "../utils/utils";
+import { getIdToken, getAuth } from "firebase/auth";
 
 const SettingsContext = createContext(null);
 
@@ -28,6 +29,9 @@ export function SettingsProvider({ children, setErrors }) {
           ...old,
           ...updateData,
         }));
+
+        // NOTE: Must refresh firebase ID token before requests that require authentication
+        getIdToken(getAuth().currentUser);
 
         const response = await fetch("/api/settings", {
           method: "PUT",
@@ -61,6 +65,10 @@ export function SettingsProvider({ children, setErrors }) {
   const readAll = useCallback(async () => {
     try {
       setLoading(true);
+
+      // NOTE: Must refresh firebase ID token before requests that require authentication
+      getIdToken(getAuth().currentUser);
+
       const response = await fetch("/api/settings", {
         method: "GET",
         credentials: "include",

@@ -1,3 +1,4 @@
+import { getAuth, getIdToken } from "firebase/auth";
 import { createContext, useCallback, useContext, useState } from "react";
 
 const StreamEventContext = createContext(null);
@@ -98,6 +99,9 @@ export function StreamEventProvider({ useAuth, children }) {
       streamEvent = { ...streamEvent };
       delete streamEvent.streamer;
 
+      // NOTE: Must refresh firebase ID token before requests that require authentication
+      getIdToken(getAuth().currentUser);
+
       const response = await fetch("/api/stream-events", {
         method: streamEvent.id ? "PUT" : "POST",
         body: JSON.stringify({
@@ -137,6 +141,9 @@ export function StreamEventProvider({ useAuth, children }) {
       delete streamEvent.streamer;
 
       try {
+        // NOTE: Must refresh firebase ID token before requests that require authentication
+        getIdToken(getAuth().currentUser);
+
         const response = await fetch("/api/stream-events", {
           method: "DELETE",
           body: JSON.stringify(streamEvent),
