@@ -20,7 +20,9 @@ COPY client/react-firebase-chat/package*.json client/react-firebase-chat/
 RUN npm config set registry https://registry.npmjs.org/
 
 # Always include dev dependencies because they are required during production build step
-RUN NODE_ENV=development npm ci --unsafe-perm
+ENV NODE_ENV=development
+RUN npm ci --unsafe-perm
+ENV NODE_ENV=$NODE_ENV
 
 COPY . .
 
