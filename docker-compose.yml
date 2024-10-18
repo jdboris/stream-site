@@ -16,7 +16,7 @@ services:
     ports:
       # NOTE: 80 is required for certbot ACME challenge
       - "80:80"
-      - "443:${APP_PORT}"
+      - "443:${APP_PROXY_PORT}"
 
     # Allow certbot to wait on this container to be serving files
     healthcheck:
@@ -26,9 +26,9 @@ services:
       retries: 30
 
     volumes:
-      - ./app/prisma:/app/prisma
-      - ./certbot/volumes/etc/letsencrypt:/certbot/volumes/etc/letsencrypt
-      - ./certbot/volumes/var/www/html/.well-known:/app/client/.well-known
+      - ${VOLUME_BASE_PATH}/app/prisma:/app/prisma
+      - ${VOLUME_BASE_PATH}/certbot/volumes/etc/letsencrypt:/certbot/volumes/etc/letsencrypt
+      - ${VOLUME_BASE_PATH}/certbot/volumes/var/www/html/.well-known:/app/client/.well-known
 
   db:
     profiles:
@@ -48,7 +48,7 @@ services:
       - 3306:3306
 
     volumes:
-      - ./db/volumes/data:/var/lib/mysql
+      - ${VOLUME_BASE_PATH}/db/volumes/data:/var/lib/mysql
 
   phpmyadmin:
     profiles:
@@ -68,7 +68,7 @@ services:
       - 3000:3000
 
     volumes:
-      - ./certbot/volumes/etc/letsencrypt:/etc/letsencrypt
+      - ${VOLUME_BASE_PATH}/certbot/volumes/etc/letsencrypt:/etc/letsencrypt
 
   certbot:
     profiles:
@@ -88,6 +88,6 @@ services:
         condition: service_healthy
 
     volumes:
-      - ./certbot/volumes/var/lib/letsencrypt/:/var/lib/letsencrypt/
-      - ./certbot/volumes/etc/letsencrypt/:/etc/letsencrypt/
-      - ./certbot/volumes/var/www/html/.well-known/:/var/www/html/.well-known/
+      - ${VOLUME_BASE_PATH}/certbot/volumes/var/lib/letsencrypt/:/var/lib/letsencrypt/
+      - ${VOLUME_BASE_PATH}/certbot/volumes/etc/letsencrypt/:/etc/letsencrypt/
+      - ${VOLUME_BASE_PATH}/certbot/volumes/var/www/html/.well-known/:/var/www/html/.well-known/
