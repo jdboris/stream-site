@@ -1,11 +1,14 @@
 TODO
 
+- invalid urls crash chat
+  - https colon slash slash i.imgur dot \com/OvQWsBf.png
 - stop restarting entire emulator container when changing app src
 - refreshing after a while causes an error message and no banner appears
 - test everything
 
 TODO (LOW PRIORITY)
 
+- debug permission denied error in console on sending messages in local environment
 - add delete channel route
 - investigate error on signup
 - fix express session types (i.e. session.token)
