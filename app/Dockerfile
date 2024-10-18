@@ -20,9 +20,9 @@ COPY client/react-firebase-chat/package*.json client/react-firebase-chat/
 RUN npm config set registry https://registry.npmjs.org/
 
 # Always include dev dependencies because they are required during production build step
-# ENV NODE_ENV=development
-RUN npm ci --unsafe-perm --include=dev
-# ENV NODE_ENV=$NODE_ENV
+ENV NODE_ENV="development"
+RUN npm ci --unsafe-perm
+ENV NODE_ENV=$NODE_ENV
 
 COPY . .
 
@@ -45,6 +45,9 @@ CMD ["npm", "run", "dev"]
 
 # PROD STAGE
 FROM base-stage AS prod-stage
+
+RUN echo $NODE_ENV
+ENV NODE_ENV="production"
 
 # # Reinstall dependencies to fix broken symlinks
 # RUN npm install

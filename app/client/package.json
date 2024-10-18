@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "preinstall": "cd react-firebase-chat && npm ci --include=dev && cd .. && npm dedupe",
+    "preinstall": "cd react-firebase-chat && npm ci && cd .. && npm dedupe",
     "build": "npx vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
