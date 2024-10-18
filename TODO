@@ -1,8 +1,9 @@
 TODO
 
+- volumes don't persist on redeploy
 - stop restarting entire emulator container when changing app src
+- refreshing after a while causes an error message and no banner appears
 - test everything
-- cron job to run certbot renewal
 
 TODO (LOW PRIORITY)
 
@@ -12,3 +13,4 @@ TODO (LOW PRIORITY)
 
 - fix sass errors on build
 - migrate to postgres
+- cron job to run certbot renewal

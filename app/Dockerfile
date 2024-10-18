@@ -36,23 +36,15 @@ RUN ./scripts/generate-ssl-cert.sh $PUBLIC_DOMAIN
 EXPOSE 80 $PORT
 
 # DEV STAGE
-FROM ${BASE_IMAGE} AS dev-stage
-
-WORKDIR /app
-
-COPY --from=base-stage /app .
+FROM base-stage AS dev-stage
 
 CMD ["npm", "run", "dev"]
 
 # PROD STAGE
-FROM ${BASE_IMAGE} AS prod-stage
+FROM base-stage AS prod-stage
 
-WORKDIR /app
-
-COPY --from=base-stage /app .
-
-# Reinstall dependencies to fix broken symlinks
-RUN npm install
+# # Reinstall dependencies to fix broken symlinks
+# RUN npm install
 
 RUN npm run build
 
