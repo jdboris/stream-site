@@ -43,8 +43,8 @@ CMD ["npm", "run", "dev"]
 # PROD STAGE
 FROM base-stage AS prod-stage
 
-# # Reinstall dependencies to fix broken symlinks
-# RUN npm install
+# Reinstall dependencies to fix broken symlinks
+RUN npm install
 
 RUN npm run build
 
