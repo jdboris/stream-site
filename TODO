@@ -7,7 +7,6 @@ TODO
 
 TODO (LOW PRIORITY)
 
-- investigate "vite not found" in production build (extra RUN npm install as workaround)
 - investigate error on signup
 - fix express session types (i.e. session.token)
 - fix env var types (don't allow undefined)

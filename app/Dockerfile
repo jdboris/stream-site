@@ -19,7 +19,7 @@ COPY client/react-firebase-chat/package*.json client/react-firebase-chat/
 
 RUN npm config set registry https://registry.npmjs.org/
 
-RUN npm ci --unsafe-perm
+RUN npm ci --unsafe-perm --include=dev
 
 COPY . .
 
@@ -43,8 +43,8 @@ CMD ["npm", "run", "dev"]
 # PROD STAGE
 FROM base-stage AS prod-stage
 
-# Reinstall dependencies to fix broken symlinks
-RUN npm install
+# # Reinstall dependencies to fix broken symlinks
+# RUN npm install
 
 RUN npm run build
 
