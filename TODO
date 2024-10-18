@@ -1,8 +1,8 @@
 TODO
 
+- fix phpmyadmin in production
 - stop restarting entire emulator container when changing app src
 - refreshing after a while causes an error message and no banner appears
-- test everything
 
 TODO (LOW PRIORITY)
 
