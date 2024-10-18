@@ -29,12 +29,6 @@ COPY . .
 # NOTE: Repeat install as workaround for symlink package bug
 RUN cd client && npm install react-firebase-chat
 
-# Install OpenSSL
-RUN apk add --no-cache openssl
-
-RUN chmod +x ./scripts/generate-ssl-cert.sh
-RUN ./scripts/generate-ssl-cert.sh $PUBLIC_DOMAIN
-
 # NOTE: 80 is required for certbot ACME challenge
 EXPOSE 80 $PORT
 

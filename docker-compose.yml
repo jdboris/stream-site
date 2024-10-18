@@ -73,6 +73,7 @@ services:
   certbot:
     profiles:
       - production
+      - development
 
     build:
       dockerfile: ./Dockerfile
@@ -80,7 +81,7 @@ services:
       args:
         CERTBOT_EMAIL: ${CERTBOT_EMAIL}
         PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
-    command: certonly -v -d "${PUBLIC_DOMAIN}" -d "www.${PUBLIC_DOMAIN}"
+    # command: certonly -v -d "${PUBLIC_DOMAIN}" -d "www.${PUBLIC_DOMAIN}"
 
     # Wait on app to be serving files before starting, so the ACME challenge can work
     depends_on:
@@ -88,6 +89,20 @@ services:
         condition: service_healthy
 
     volumes:
-      - ${VOLUME_BASE_PATH}/certbot/volumes/var/lib/letsencrypt/:/var/lib/letsencrypt/
-      - ${VOLUME_BASE_PATH}/certbot/volumes/etc/letsencrypt/:/etc/letsencrypt/
-      - ${VOLUME_BASE_PATH}/certbot/volumes/var/www/html/.well-known/:/var/www/html/.well-known/
+      - ${VOLUME_BASE_PATH}/certbot/volumes/var/lib/letsencrypt:/var/lib/letsencrypt
+      - ${VOLUME_BASE_PATH}/certbot/volumes/etc/letsencrypt:/etc/letsencrypt
+      - ${VOLUME_BASE_PATH}/certbot/volumes/var/www/html/.well-known:/var/www/html/.well-known
+
+  certbot-self-signed:
+    profiles:
+      - production
+      - development
+
+    build:
+      dockerfile: ./Dockerfile
+      context: ./certbot-self-signed
+      args:
+        PUBLIC_DOMAIN: ${PUBLIC_DOMAIN}
+
+    volumes:
+      - ${VOLUME_BASE_PATH}/certbot/volumes/etc/letsencrypt:/etc/letsencrypt

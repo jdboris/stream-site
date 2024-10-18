@@ -25,8 +25,14 @@ import HttpError from "./utils/http-error.js";
 const { NODE_ENV, PORT, PUBLIC_DOMAIN } = process.env;
 
 // Use self-signed cert for now
-const keyPath = path.resolve(__dirname, `../ssl/privkey.pem`);
-const certPath = path.resolve(__dirname, `../ssl/fullchain.pem`);
+const keyPath = path.resolve(
+  __dirname,
+  `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`
+);
+const certPath = path.resolve(
+  __dirname,
+  `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`
+);
 startServer(keyPath, certPath);
 
 // /** @type {HttpsServer|null} */
@@ -149,9 +155,15 @@ function startHttpsAcmeChallengeServer() {
   console.log("Starting HTTPS ACME challenge server...");
 
   // Use self-signed cert for now
-  const keyPath = path.resolve(__dirname, `../ssl/privkey.pem`);
+  const keyPath = path.resolve(
+    __dirname,
+    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/privkey.pem`
+  );
 
-  const certPath = path.resolve(__dirname, `../ssl/fullchain.pem`);
+  const certPath = path.resolve(
+    __dirname,
+    `../../certbot/volumes/etc/letsencrypt/live/${PUBLIC_DOMAIN}/fullchain.pem`
+  );
 
   const app = express();
 
