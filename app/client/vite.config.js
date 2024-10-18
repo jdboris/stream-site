@@ -30,6 +30,9 @@ export default defineConfig(({ mode }) => {
       basicSsl(),
       VitePWA({
         registerType: "autoUpdate",
+        workbox: {
+          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // Set limit to 5 MB
+        },
         injectRegister: "auto",
         strategies: "generateSW",
         pwaAssets: {
