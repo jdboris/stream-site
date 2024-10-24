@@ -15,6 +15,8 @@ REPO_URL=$(git remote get-url origin)
 # Insert the access token into the URL
 REPO_URL_WITH_AUTH=$(echo "$REPO_URL" | sed "s|https://|https://${GITHUB_PERSONAL_ACCESS_TOKEN}@|")
 
+cd ./app && npm run deploy &
+
 ssh -i ./secrets/id_rsa root@$SSH_ADDRESS "rm -rf /stream-site/ && mkdir -p /stream-site/ && cd /stream-site/ && git clone --recurse-submodules -j8 $REPO_URL_WITH_AUTH . ; git pull"
 
 # Copy/upload untracked files

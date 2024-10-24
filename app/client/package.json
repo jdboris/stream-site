@@ -7,6 +7,7 @@
     "dev": "vite",
     "preinstall": "cd react-firebase-chat && npm ci && cd .. && npm dedupe",
     "build": "npx vite build",
+    "deploy": "cd react-firebase-chat && npm run deploy",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "delete-modules": "npx -y rimraf node_modules",

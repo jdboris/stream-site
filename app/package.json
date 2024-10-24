@@ -14,6 +14,7 @@
     "db:migrate": "npx prisma migrate dev",
     "preinstall": "cd client && npm ci",
     "build": "npm run prisma:generate && cd client && npm run build",
+    "deploy": "cd client && npm run deploy",
     "start": "npx wait-on tcp:stream-site-db-1:3306 && npx prisma migrate deploy && node ./src/index.js",
     "clean": "npx rimraf --glob **/node_modules && npx rimraf --glob **/package-lock.json"
   },
