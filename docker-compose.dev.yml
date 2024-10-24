@@ -47,7 +47,7 @@ services:
 
     develop:
       watch:
-        - action: sync+restart
+        - action: sync
           path: ${FIREBASE_APP_PATH}/firebase
           target: /app
 
