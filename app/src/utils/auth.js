@@ -83,7 +83,7 @@ export async function getUser(authToken) {
       isModerator: userData.isModerator ?? false,
       isBanned: userData.isBanned ?? false,
     },
-    where: { uid: userData.uid },
+    where: { lowercaseUsername: userData.username.toLowerCase() },
   });
 
   return user;
