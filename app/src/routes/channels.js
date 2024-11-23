@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Router } from "express";
 import HttpError from "../utils/http-error.js";
-import ChannelDto from "../dots/channel-dto.js";
+import ChannelDto from "../dtos/channel-dto.js";
 import { getCurrentUser } from "../utils/auth.js";
 
 const prisma = new PrismaClient();
