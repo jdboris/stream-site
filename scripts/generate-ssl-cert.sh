@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo Generating local SSL certificate...
 
 # Generate a private key

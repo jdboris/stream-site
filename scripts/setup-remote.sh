@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 source .env
 
 echo "Uninstalling apache, if any..."
