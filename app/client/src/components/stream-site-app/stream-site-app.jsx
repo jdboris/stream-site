@@ -89,7 +89,7 @@ function StreamSitePage({
               useAuth={useFirebaseAuth}
             />
           </StreamEventProvider>
-          <section className={theme.column}>
+          <section className={theme.column} style={{ flexBasis: "300px" }}>
             <SuggestionsProvider>
               <SuggestionBox
                 useAuth={useFirebaseAuth}

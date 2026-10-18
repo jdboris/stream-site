@@ -35,6 +35,10 @@
         padding: 5px 10px;
         background: black;
         font-size: 0.7em;
+
+        svg {
+          min-width: 1em;
+        }
       }
 
       li:nth-child(even) {
