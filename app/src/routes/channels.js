@@ -127,4 +127,47 @@ router.put("/api/channels", async (req, res) => {
   res.send({ success: true });
 });
 
+router.delete("/api/channels", async (req, res) => {
+  const user = await getCurrentUser(req);
+
+  if (!user) {
+    throw new HttpError("Please login to continue.", 401);
+  }
+
+  if (!user.isStreamer && !user.isAdmin) {
+    throw new HttpError("Permission denied.", 403);
+  }
+
+  const { id } = req.body ?? {};
+
+  if (!Number.isInteger(id) || id <= 0) {
+    throw new HttpError("Invalid channel ID.", 400);
+  }
+
+  const channel = await prisma.channel.findUnique({ where: { id } });
+
+  if (!channel) {
+    throw new HttpError("Channel not found.", 404);
+  }
+
+  if (channel.creatorId !== user.id && !user.isAdmin) {
+    throw new HttpError("Permission denied.", 403);
+  }
+
+  const settings = await prisma.setting.findFirst({
+    where: { liveChannelId: id },
+  });
+
+  if (settings) {
+    throw new HttpError(
+      "Cannot delete the live channel. Select another live channel first.",
+      409
+    );
+  }
+
+  await prisma.channel.delete({ where: { id } });
+
+  res.send({ success: true });
+});
+
 export default router;

@@ -146,16 +146,17 @@ export function ChannelForm({ useChannels, resetToLive, ...props }) {
         ) : (
           <>
             <button
+              type="button"
               className={`${theme.dangerBg} ${theme.leftButton} ${
                 loading ? theme.loading : ""
               }`}
               onClick={async (e) => {
                 e.preventDefault();
 
-                tryOperation(async () => {
+                await tryOperation(async () => {
                   await deleteChannel(channel);
-                  readAll();
-                  resetToLive();
+                  await readAll();
+                  await resetToLive();
                 }, setErrors);
               }}
             >
