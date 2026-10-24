@@ -41,6 +41,7 @@ export function Chat({
   return useMemo(
     () => (
       <ChatRoomApp
+        klipyApiKey={import.meta.env.VITE_KLIPY_API_KEY}
         className={className + " " + (isFullscreen ? theme.fullscreen : "")}
         onUserChange={(authUser, userData) => {
           tryOperation(async () => {
