@@ -215,7 +215,8 @@
     }
 
     [data-chat-part="gif-button"],
-    [data-chat-part="emoji-button"] {
+    [data-chat-part="emoji-button"],
+    [data-chat-part="format-button"] {
       position: absolute;
       bottom: 13px;
       z-index: 1;
@@ -227,6 +228,10 @@
 
     [data-chat-part="emoji-button"] {
       right: 39px;
+    }
+
+    [data-chat-part="format-button"] {
+      right: 13px;
     }
 
     > svg:hover,
