@@ -152,6 +152,7 @@
   }
 
   [data-chat-part="composer"] {
+    position: relative;
     width: calc(100% - 20px);
     margin: 4px 10px 0;
     padding: 5px;
@@ -211,6 +212,21 @@
     button[data-chat-part="gif-button"] {
       background: transparent;
       color: var(--chat-muted);
+    }
+
+    [data-chat-part="gif-button"],
+    [data-chat-part="emoji-button"] {
+      position: absolute;
+      bottom: 13px;
+      z-index: 1;
+    }
+
+    [data-chat-part="gif-button"] {
+      right: 65px;
+    }
+
+    [data-chat-part="emoji-button"] {
+      right: 39px;
     }
 
     > svg:hover,
