@@ -1,6 +1,16 @@
-import ChatRoomApp from "react-firebase-chat";
 import { useMemo } from "react";
+import ChatRoomApp from "react-firebase-chat";
 import { tryOperation } from "../../utils/utils";
+import modernSlateBlueChat from "./themes/modern-slate-blue.module.scss";
+
+const chatThemes = [
+  { id: "default", name: "Default" },
+  {
+    id: "modern-slate-blue",
+    name: "Modern Slate Blue",
+    className: modernSlateBlueChat.modern,
+  },
+];
 
 export function Chat({
   theme,
@@ -35,14 +45,16 @@ export function Chat({
         location.reload();
       },
     }),
-    [readAll, readAllSettings, readLiveChannel, setErrors, user?.isStreamer]
+    [readAll, readAllSettings, readLiveChannel, setErrors, user?.isStreamer],
   );
 
   return useMemo(
     () => (
       <ChatRoomApp
         klipyApiKey={import.meta.env.VITE_KLIPY_API_KEY}
-        className={className + " " + (isFullscreen ? theme.fullscreen : "")}
+        className={[className, isFullscreen ? theme.fullscreen : ""]
+          .filter(Boolean)
+          .join(" ")}
         onUserChange={(authUser, userData) => {
           tryOperation(async () => {
             await updateAuth(authUser, userData);
@@ -51,6 +63,7 @@ export function Chat({
         callbacks={callbacks}
         callbackToTrigger={callbackToTrigger}
         headerLinks={headerLinks}
+        themes={chatThemes}
       />
     ),
 
@@ -63,6 +76,6 @@ export function Chat({
       headerLinks,
       setErrors,
       updateAuth,
-    ]
+    ],
   );
 }
