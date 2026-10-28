@@ -214,26 +214,6 @@
       color: var(--chat-muted);
     }
 
-    [data-chat-part="gif-button"],
-    [data-chat-part="emoji-button"],
-    [data-chat-part="format-button"] {
-      position: absolute;
-      bottom: 13px;
-      z-index: 1;
-    }
-
-    [data-chat-part="gif-button"] {
-      right: 65px;
-    }
-
-    [data-chat-part="emoji-button"] {
-      right: 39px;
-    }
-
-    [data-chat-part="format-button"] {
-      right: 13px;
-    }
-
     > svg:hover,
     > label:hover,
     [data-chat-part="gif-button"]:hover {
